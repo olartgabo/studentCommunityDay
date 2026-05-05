@@ -1,0 +1,57 @@
+/* ============================================
+   Shared brand styles + utility classes
+   ============================================ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--ink-900);
+  background: var(--ink-25);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--cyan-300); color: var(--upb-navy-900); }
+
+/* Mono label helper (used everywhere) */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  font-weight: 500;
+}
+.mono-label.on-dark { color: var(--cyan-300); }
+
+/* Pixel-perfect grid background (blueprint) */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.grid-bg-light {
+  background-image:
+    linear-gradient(rgba(6,23,93,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6,23,93,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Dot grid */
+.dot-bg {
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Cyan glow gradient */
+.aurora {
+  background:
+    radial-gradient(60% 80% at 80% 20%, rgba(0,191,240,0.22), transparent 60%),
+    radial-gradient(50% 60% at 10% 90%, rgba(56,214,255,0.18), transparent 60%);
+}

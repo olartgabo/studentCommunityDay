@@ -1,0 +1,1422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SCD · Brand Identity & Design System</title>
+  <meta name="viewport" content="width=1440" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="brand.css" />
+  <style>
+    body { background: var(--ink-25); }
+
+    /* Page chrome --------------------------------- */
+    .page { max-width: 1280px; margin: 0 auto; padding: 80px 56px 160px; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: var(--border);
+      position: sticky; top: 0; background: rgba(251,252,253,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      z-index: 50;
+    }
+    .topbar .left { display:flex; align-items:center; gap: 14px; }
+    .topbar .nav { display:flex; gap: 22px; }
+    .topbar .nav a {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+      color: var(--ink-600); text-decoration: none;
+    }
+    .topbar .nav a:hover { color: var(--upb-navy-500); }
+    .pill {
+      font-family: var(--font-mono); font-size: 11px;
+      padding: 4px 10px; border-radius: var(--r-full);
+      background: var(--ink-100); color: var(--ink-600);
+      letter-spacing: 0.04em;
+    }
+
+    /* Section ------------------------------------- */
+    section { padding: 96px 0 24px; }
+    .sec-head { display:flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; gap: 24px;}
+    .sec-head h2 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: var(--fs-3xl); margin: 0; letter-spacing: -0.02em;
+      color: var(--upb-navy-500);
+    }
+    .sec-head .sec-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-400); }
+    .sec-eyebrow {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--cyan-600); margin-bottom: 14px;
+    }
+    .sec-lede { font-size: var(--fs-md); color: var(--ink-600); max-width: 64ch; line-height: 1.55; margin: 0 0 32px; }
+
+    /* Hero ---------------------------------------- */
+    .hero {
+      position: relative; overflow: hidden;
+      background: var(--upb-navy-700);
+      border-radius: var(--r-2xl);
+      padding: 72px 64px 64px;
+      color: white;
+      margin-top: 32px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, black 50%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, black 50%, transparent 100%);
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(40% 60% at 88% 20%, rgba(0,191,240,0.32), transparent 60%),
+        radial-gradient(40% 60% at 10% 100%, rgba(56,214,255,0.18), transparent 60%);
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;}
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--fs-6xl); line-height: 0.96; letter-spacing: -0.035em;
+      margin: 22px 0 18px; font-weight: 500;
+    }
+    .hero h1 em {
+      font-style: normal; color: var(--cyan-300);
+      font-feature-settings: "ss01";
+    }
+    .hero p.lede { font-size: var(--fs-md); color: rgba(255,255,255,0.78); max-width: 52ch; line-height: 1.55; }
+    .hero .meta-row {
+      display: flex; gap: 28px; margin-top: 36px;
+      font-family: var(--font-mono); font-size: 12px;
+      color: rgba(255,255,255,0.7); letter-spacing: 0.04em;
+    }
+    .hero .meta-row strong { color: white; font-weight: 500; }
+
+    /* Logo card area */
+    .logo-stage {
+      aspect-ratio: 1/1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-xl);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .logo-stage::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .logo-stage .corner {
+      position: absolute; font-family: var(--font-mono); font-size: 10px;
+      color: rgba(255,255,255,0.45); letter-spacing: 0.08em;
+    }
+    .logo-stage .c-tl { top: 12px; left: 16px; }
+    .logo-stage .c-br { bottom: 12px; right: 16px; }
+
+    /* Logo SVG components ------------------------- */
+    .lockup { display: inline-flex; align-items: center; gap: 14px; }
+    .lockup .mark { width: 44px; height: 44px; }
+    .lockup .wordmark {
+      font-family: var(--font-display);
+      font-weight: 600; font-size: 22px;
+      letter-spacing: -0.02em; line-height: 1;
+      color: var(--upb-navy-500);
+    }
+    .lockup .wordmark .accent { color: var(--cyan-500); }
+    .lockup.on-dark .wordmark { color: white; }
+    .lockup.on-dark .wordmark .accent { color: var(--cyan-300); }
+    .lockup .sub {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-500); margin-top: 4px;
+    }
+    .lockup.on-dark .sub { color: rgba(255,255,255,0.55); }
+    .lockup .stack { display:flex; flex-direction: column; gap: 2px;}
+
+    /* Generic card -------------------------------- */
+    .card {
+      background: white;
+      border: var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+    .card.dark {
+      background: var(--ink-900);
+      border: var(--border-dark);
+      color: white;
+    }
+
+    /* Logo grid */
+    .logo-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 16px;
+    }
+    .logo-cell {
+      border-radius: var(--r-lg); padding: 32px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 220px; position: relative; overflow: hidden;
+      border: var(--border);
+    }
+    .logo-cell.dark { background: var(--upb-navy-700); border-color: rgba(255,255,255,0.08); color: white; }
+    .logo-cell.cyan { background: var(--cyan-400); border-color: var(--cyan-500); color: var(--upb-navy-700); }
+    .logo-cell.white { background: white; }
+    .logo-cell.navy { background: var(--upb-navy-500); color: white; border-color: var(--upb-navy-600);}
+    .logo-cell .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7;}
+
+    /* Construction view */
+    .construction {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+    }
+    .construction .card {
+      aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .construction .card::before {
+      content: ''; position: absolute; inset: 16px;
+      border: 1px dashed var(--ink-200); border-radius: var(--r-md);
+    }
+    .construction .label-tl, .construction .label-bl {
+      position: absolute; font-family: var(--font-mono); font-size: 10px;
+      color: var(--ink-400); letter-spacing: 0.08em;
+    }
+    .construction .label-tl { top: 12px; left: 16px; }
+    .construction .label-bl { bottom: 12px; left: 16px; color: var(--cyan-600);}
+
+    /* Color palette ------------------------------- */
+    .palette { display: grid; grid-template-columns: repeat(11, 1fr); gap: 8px; }
+    .palette .swatch {
+      aspect-ratio: 0.7;
+      border-radius: var(--r-sm);
+      padding: 12px 10px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      font-family: var(--font-mono); font-size: 10px;
+    }
+    .palette .swatch .step { font-weight: 600; opacity: 0.85;}
+    .palette .swatch .hex { opacity: 0.7; font-size: 9px;}
+    .palette-row { margin-bottom: 24px; }
+    .palette-name {
+      display: flex; align-items: baseline; gap: 16px; margin-bottom: 10px;
+    }
+    .palette-name h3 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: var(--fs-lg); margin: 0; color: var(--upb-navy-500); letter-spacing: -0.01em;
+    }
+    .palette-name .desc { font-size: var(--fs-sm); color: var(--ink-500);}
+
+    /* Semantic colors */
+    .sem-grid { display:grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .sem-cell {
+      border-radius: var(--r-md); padding: 20px;
+      border: var(--border);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .sem-cell .dot { width: 14px; height: 14px; border-radius: 4px; margin-bottom: 8px;}
+    .sem-cell .name { font-family: var(--font-mono); font-size: 12px; color: var(--ink-700); }
+    .sem-cell .hex { font-family: var(--font-mono); font-size: 11px; color: var(--ink-400); }
+    .sem-cell .use { font-size: 13px; color: var(--ink-600); margin-top: 4px; }
+
+    /* Typography section -------------------------- */
+    .type-row {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 32px; padding: 24px 0;
+      border-bottom: var(--border);
+      align-items: baseline;
+    }
+    .type-row:last-child { border-bottom: 0; }
+    .type-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-500); }
+    .type-meta .name { color: var(--upb-navy-500); display: block; font-weight: 500; margin-bottom: 4px; font-size: 13px;}
+    .type-sample { color: var(--ink-900); }
+
+    .display-1 { font-family: var(--font-display); font-size: var(--fs-7xl); font-weight: 500; letter-spacing: -0.04em; line-height: 0.92; }
+    .display-2 { font-family: var(--font-display); font-size: var(--fs-6xl); font-weight: 500; letter-spacing: -0.035em; line-height: 0.94; }
+    .h1 { font-family: var(--font-display); font-size: var(--fs-5xl); font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+    .h2 { font-family: var(--font-display); font-size: var(--fs-4xl); font-weight: 500; letter-spacing: -0.025em; line-height: 1.05; }
+    .h3 { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+    .h4 { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2;}
+    .body-lg { font-size: var(--fs-md); line-height: 1.55; color: var(--ink-700); }
+    .body { font-size: var(--fs-base); line-height: 1.55; color: var(--ink-700); }
+    .body-sm { font-size: var(--fs-sm); line-height: 1.5; color: var(--ink-600);}
+    .mono-code { font-family: var(--font-mono); font-size: 14px; color: var(--cyan-600); }
+
+    /* Buttons ------------------------------------- */
+    .btn-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center;}
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-weight: 500;
+      font-size: 14px; letter-spacing: -0.005em;
+      padding: 10px 16px; border-radius: var(--r-sm);
+      border: 1px solid transparent;
+      cursor: pointer; transition: all var(--dur-base) var(--ease-out);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--upb-navy-500); color: white;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 1px 0 rgba(255,255,255,0.12) inset, var(--shadow-sm);
+    }
+    .btn-primary:hover { background: var(--upb-navy-600); }
+    .btn-cyan {
+      background: var(--cyan-400); color: var(--upb-navy-700);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.4) inset, 0 0 0 1px rgba(0,125,165,0.4);
+    }
+    .btn-cyan:hover { background: var(--cyan-300); }
+    .btn-ghost {
+      background: transparent; color: var(--upb-navy-500);
+      border-color: var(--ink-200);
+    }
+    .btn-ghost:hover { background: var(--ink-50); border-color: var(--ink-300); }
+    .btn-mono {
+      background: var(--ink-900); color: var(--cyan-300);
+      font-family: var(--font-mono); font-size: 13px;
+      padding: 9px 14px;
+    }
+    .btn-mono:hover { background: var(--ink-800); }
+    .btn-lg { padding: 14px 22px; font-size: 15px; border-radius: var(--r-md); }
+    .btn-sm { padding: 7px 12px; font-size: 12px; }
+    .btn .arrow { transition: transform var(--dur-base) var(--ease-out); }
+    .btn:hover .arrow { transform: translateX(2px); }
+
+    /* Form components ----------------------------- */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .field label {
+      display: block;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--ink-600);
+      margin-bottom: 8px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1px solid var(--ink-200);
+      border-radius: var(--r-sm);
+      font-family: var(--font-sans); font-size: 14px;
+      background: white;
+      color: var(--ink-900);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: var(--cyan-400);
+      box-shadow: 0 0 0 3px rgba(0,191,240,0.15);
+    }
+    .field .hint { font-family: var(--font-mono); font-size: 11px; color: var(--ink-400); margin-top: 6px;}
+
+    .checkbox-group { display: flex; flex-direction: column; gap: 10px;}
+    .check {
+      display: flex; align-items: center; gap: 10px; font-size: 14px;
+      color: var(--ink-700);
+    }
+    .check .box {
+      width: 18px; height: 18px; border-radius: 4px;
+      border: 1.5px solid var(--ink-300); background: white;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .check.checked .box { background: var(--upb-navy-500); border-color: var(--upb-navy-500); }
+    .check.checked .box::after {
+      content: ''; width: 5px; height: 9px; border: solid white;
+      border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px);
+    }
+
+    /* Badges & cards ------------------------------ */
+    .badge-row { display:flex; flex-wrap: wrap; gap: 10px;}
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: var(--r-full);
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .badge.navy { background: var(--upb-navy-50); color: var(--upb-navy-500); }
+    .badge.navy .dot { background: var(--upb-navy-500); }
+    .badge.cyan { background: var(--cyan-50); color: var(--cyan-700); }
+    .badge.cyan .dot { background: var(--cyan-400); }
+    .badge.success { background: #e8f6ee; color: var(--success); }
+    .badge.success .dot { background: var(--success); }
+    .badge.warning { background: #fbf2dd; color: var(--warning); }
+    .badge.warning .dot { background: var(--warning); }
+    .badge.outline { background: transparent; border: 1px solid var(--ink-200); color: var(--ink-600); }
+    .badge.dark { background: rgba(255,255,255,0.08); color: var(--cyan-300); }
+
+    /* Speaker / agenda cards ---------------------- */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .speaker-card {
+      background: white;
+      border: var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: all var(--dur-base) var(--ease-out);
+      position: relative;
+    }
+    .speaker-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--cyan-300);
+    }
+    .speaker-card .photo {
+      aspect-ratio: 4/3;
+      background:
+        repeating-linear-gradient(135deg, var(--upb-navy-50) 0 8px, var(--upb-navy-100) 8px 16px);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .speaker-card .photo .ph {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--upb-navy-400); letter-spacing: 0.08em; padding: 4px 10px;
+      background: rgba(255,255,255,0.85); border-radius: 4px;
+    }
+    .speaker-card .photo .num {
+      position: absolute; top: 12px; left: 12px;
+      font-family: var(--font-mono); font-size: 11px; color: var(--upb-navy-500);
+      background: white; padding: 2px 8px; border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .speaker-card .body {
+      padding: 18px 20px;
+    }
+    .speaker-card .name {
+      font-family: var(--font-display); font-size: 18px;
+      font-weight: 500; color: var(--upb-navy-500); margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+    .speaker-card .role {
+      font-family: var(--font-mono); font-size: 12px; color: var(--ink-500); margin-bottom: 12px;
+    }
+
+    /* Agenda card */
+    .agenda-card {
+      background: white; border: var(--border); border-radius: var(--r-lg);
+      padding: 22px 24px; display: grid;
+      grid-template-columns: 110px 1fr auto; gap: 24px; align-items: center;
+      transition: all var(--dur-base) var(--ease-out);
+    }
+    .agenda-card:hover { border-color: var(--cyan-300); box-shadow: var(--shadow-sm);}
+    .agenda-card .time {
+      font-family: var(--font-mono); font-size: 14px;
+      color: var(--upb-navy-500); font-weight: 500;
+    }
+    .agenda-card .time .dur { display:block; font-size: 11px; color: var(--ink-400); margin-top: 4px;}
+    .agenda-card .title {
+      font-family: var(--font-display); font-size: 17px;
+      color: var(--ink-900); font-weight: 500; margin: 0 0 4px; letter-spacing: -0.005em;
+    }
+    .agenda-card .who { font-size: 13px; color: var(--ink-500); }
+    .track-tag {
+      font-family: var(--font-mono); font-size: 11px;
+      padding: 4px 10px; border-radius: var(--r-sm);
+      letter-spacing: 0.04em;
+    }
+    .track-cloud { background: var(--upb-navy-50); color: var(--upb-navy-500);}
+    .track-devops { background: var(--cyan-50); color: var(--cyan-700);}
+    .track-ai { background: #f3edff; color: #6a3fc6;}
+    .track-sec { background: #fde9ed; color: #b53651;}
+
+    /* Stamp / badge identity ---------------------- */
+    .stamps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;}
+    .stamp-card {
+      aspect-ratio: 1/1; border-radius: var(--r-lg);
+      display: flex; align-items: center; justify-content: center;
+      border: var(--border);
+      background: var(--ink-50);
+      position: relative;
+    }
+    .stamp-card.dark { background: var(--upb-navy-700); border-color: rgba(255,255,255,0.08);}
+    .stamp-card .label {
+      position: absolute; bottom: 12px; left: 16px;
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--ink-500); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .stamp-card.dark .label { color: rgba(255,255,255,0.55); }
+
+    /* Terminal motif ------------------------------ */
+    .terminal {
+      background: var(--ink-950);
+      border-radius: var(--r-lg);
+      padding: 0; overflow: hidden;
+      border: 1px solid var(--ink-800);
+      font-family: var(--font-mono);
+      box-shadow: var(--shadow-lg);
+    }
+    .terminal .bar {
+      background: var(--ink-900);
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--ink-800);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px;
+      color: var(--ink-400);
+    }
+    .terminal .bar .dots { display: flex; gap: 6px; }
+    .terminal .bar .dots span { width: 11px; height: 11px; border-radius: 50%; background: #353b4d;}
+    .terminal .bar .title { font-size: 11px; letter-spacing: 0.06em; }
+    .terminal .body {
+      padding: 22px 24px; font-size: 13.5px; line-height: 1.7;
+      color: var(--ink-200);
+    }
+    .terminal .prompt { color: var(--cyan-300); }
+    .terminal .cmd { color: white; }
+    .terminal .out { color: var(--ink-300); }
+    .terminal .ok { color: #5fe39d;}
+    .terminal .meta { color: var(--ink-500); }
+    .terminal .blink::after {
+      content: '▋'; color: var(--cyan-300);
+      animation: blink 1s steps(2) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0;} }
+
+    /* Spacing and grid display -------------------- */
+    .spacing-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;}
+    .sp-cell {
+      border: var(--border); border-radius: var(--r-sm);
+      padding: 16px; background: white;
+      display: flex; flex-direction: column; gap: 12px;
+      align-items: flex-start;
+    }
+    .sp-cell .bar { background: var(--cyan-400); height: 8px; border-radius: 2px;}
+    .sp-cell .meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-500); }
+    .sp-cell .meta strong { color: var(--upb-navy-500); display: block; font-size: 13px; font-weight: 500;}
+
+    /* Iconography -------------------------------- */
+    .icon-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px;}
+    .icon-cell {
+      aspect-ratio: 1/1; border: var(--border); border-radius: var(--r-md);
+      display: flex; align-items: center; justify-content: center;
+      background: white;
+      position: relative;
+    }
+    .icon-cell .lab {
+      position: absolute; bottom: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--ink-400);
+      letter-spacing: 0.04em;
+    }
+
+    /* Pattern showcase ---------------------------- */
+    .pattern-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .pattern-tile {
+      aspect-ratio: 4/3; border-radius: var(--r-lg);
+      position: relative; overflow: hidden;
+      border: var(--border);
+    }
+    .pattern-tile .tag {
+      position: absolute; bottom: 12px; left: 14px;
+      font-family: var(--font-mono); font-size: 10px;
+      color: white; letter-spacing: 0.08em;
+      background: rgba(0,0,0,0.4); padding: 3px 8px; border-radius: 4px;
+    }
+
+    .pat-grid {
+      background: var(--upb-navy-700);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .pat-aurora {
+      background:
+        radial-gradient(60% 80% at 80% 20%, rgba(0,191,240,0.55), transparent 60%),
+        radial-gradient(50% 60% at 20% 90%, rgba(56,214,255,0.4), transparent 60%),
+        var(--upb-navy-700);
+    }
+    .pat-stripe {
+      background: repeating-linear-gradient(135deg,
+        var(--upb-navy-500) 0 18px,
+        var(--upb-navy-600) 18px 36px);
+    }
+    .pat-cloud {
+      background: var(--upb-navy-50);
+      position: relative;
+    }
+    .pat-circuit {
+      background: var(--ink-900);
+    }
+    .pat-dot {
+      background: var(--upb-navy-700);
+      background-image: radial-gradient(rgba(255,255,255,0.2) 1.5px, transparent 1.5px);
+      background-size: 16px 16px;
+    }
+
+    /* Motion guidelines */
+    .motion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .motion-card {
+      background: white; border: var(--border); border-radius: var(--r-md);
+      padding: 22px 20px; display: flex; flex-direction: column; gap: 14px;
+    }
+    .motion-card .name { font-family: var(--font-display); font-weight: 500; color: var(--upb-navy-500); font-size: 16px;}
+    .motion-card .curve { height: 60px; position: relative; border-bottom: 1px dashed var(--ink-200); }
+    .motion-card .vals { font-family: var(--font-mono); font-size: 11px; color: var(--ink-500);}
+    .motion-card svg { display: block; }
+
+    /* Footer */
+    footer {
+      margin-top: 80px; padding: 40px 0;
+      border-top: var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 12px; color: var(--ink-500);
+    }
+    footer a { color: var(--cyan-600); text-decoration: none;}
+  </style>
+</head>
+<body>
+
+<!-- ================== STYLE SHEETS ================== -->
+<div class="page">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="left">
+      <span class="lockup">
+        <!-- Compact mark for topbar -->
+        <svg class="mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SCD mark">
+          <!-- Stacked rounded squares forming an abstract cloud/node -->
+          <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+          <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+          <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+        </svg>
+        <span class="stack">
+          <span class="wordmark">SCD<span class="accent">·</span><span style="font-weight:400;">26</span></span>
+          <span class="sub">Cochabamba — Bolivia</span>
+        </span>
+      </span>
+    </div>
+    <nav class="nav">
+      <a href="#identity">01 / Identity</a>
+      <a href="#color">02 / Color</a>
+      <a href="#type">03 / Type</a>
+      <a href="#components">04 / Components</a>
+      <a href="#patterns">05 / Patterns</a>
+      <a href="#motion">06 / Motion</a>
+    </nav>
+    <span class="pill">v1.0 — Oct 2026</span>
+  </div>
+
+  <!-- =========== INTRO HERO =========== -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="mono-label on-dark">// design-system / v1.0 / build:0426</div>
+        <h1>Build the<br/><em>Cloud Generation.</em></h1>
+        <p class="lede">Design system &amp; mark identity for the AWS Student Community Day at Universidad Privada Boliviana — Cochabamba edition. Original work, technical voice, navy core, cyan signal.</p>
+        <div class="meta-row">
+          <span><strong>OCT 2026</strong> — Cochabamba, BO</span>
+          <span><strong>4 tracks</strong> — Cloud · DevOps · AI · Security</span>
+          <span><strong>UPB</strong> — Campus Principal</span>
+        </div>
+      </div>
+      <div class="logo-stage">
+        <span class="corner c-tl">[ MARK / PRIMARY ]</span>
+        <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Concept: three stacked nodes — students, cloud, community converging -->
+          <rect x="20"  y="40"  width="100" height="100" rx="26" fill="#06175D"/>
+          <rect x="80"  y="60"  width="100" height="100" rx="26" fill="#00BFF0"/>
+          <rect x="50"  y="50"  width="100" height="100" rx="26" fill="none" stroke="white" stroke-width="3"/>
+        </svg>
+        <span class="corner c-br">200 × 200 / RGB</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========== 01 IDENTITY =========== -->
+  <section id="identity">
+    <div class="sec-eyebrow">01 / Identity</div>
+    <div class="sec-head">
+      <h2>Mark, lockups &amp; construction</h2>
+      <span class="sec-meta">// 6 variants</span>
+    </div>
+    <p class="sec-lede">The mark is built from three rounded modules — solid navy, solid cyan, and an outlined node — overlapping to form an abstract <em>node-stack</em>. It reads as a cloud, a stack of services, and three communities converging: <strong>students</strong>, <strong>builders</strong>, <strong>UPB</strong>.</p>
+
+    <!-- Logo lockup variants -->
+    <div class="logo-grid">
+
+      <!-- Primary horizontal lockup -->
+      <div class="logo-cell white" style="grid-column: span 1;">
+        <span class="label" style="color: var(--ink-500);">Primary lockup / horizontal</span>
+        <div class="lockup" style="gap: 18px;">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+            <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+            <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+          </svg>
+          <span class="stack">
+            <span class="wordmark" style="font-size: 32px;">SCD<span class="accent">·</span><span style="font-weight:400;">26</span></span>
+            <span class="sub">Student Community Day · Cochabamba</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Stacked lockup -->
+      <div class="logo-cell dark">
+        <span class="label">Stacked / dark surface</span>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+            <rect x="6"  y="14" width="32" height="32" rx="9" fill="#00BFF0"/>
+            <rect x="22" y="22" width="32" height="32" rx="9" fill="white"/>
+            <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#7EE7FF" stroke-width="2.5"/>
+          </svg>
+          <span class="stack">
+            <span class="wordmark" style="font-size: 28px; color: white;">SCD<span style="color: var(--cyan-300);">·</span><span style="font-weight:400; color: white;">26</span></span>
+            <span class="sub" style="color: rgba(255,255,255,0.5);">Build the Cloud Generation</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Mark only -->
+      <div class="logo-cell cyan">
+        <span class="label" style="color: var(--upb-navy-700);">Mark / monochrome</span>
+        <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
+          <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+          <rect x="22" y="22" width="32" height="32" rx="9" fill="#06175D" opacity="0.5"/>
+          <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+        </svg>
+        <span class="label" style="color: var(--upb-navy-700);">[ M-01 ]</span>
+      </div>
+
+      <!-- Long form / formal -->
+      <div class="logo-cell white" style="grid-column: span 2;">
+        <span class="label" style="color: var(--ink-500);">Formal lockup / long-form</span>
+        <div class="lockup" style="gap: 22px; align-items: flex-start;">
+          <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+            <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+            <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+            <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+          </svg>
+          <span class="stack" style="border-left: 1px solid var(--ink-200); padding-left: 22px;">
+            <span style="font-family: var(--font-display); font-size: 26px; color: var(--upb-navy-500); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05;">Student Community Day</span>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--ink-500); letter-spacing: 0.08em; margin-top: 8px;">UPB · COCHABAMBA · BOLIVIA · OCT 2026</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Stamp -->
+      <div class="logo-cell navy" style="align-items: center; justify-content: center; gap: 18px;">
+        <span class="label" style="position: absolute; top: 16px; left: 20px;">Stamp / circular</span>
+        <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+          <defs>
+            <path id="circle-path" d="M 100, 100 m -78, 0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+          </defs>
+          <circle cx="100" cy="100" r="92" stroke="#7EE7FF" stroke-width="1" fill="none"/>
+          <circle cx="100" cy="100" r="78" stroke="#00BFF0" stroke-width="1" stroke-dasharray="2 4"/>
+          <text font-family="JetBrains Mono" font-size="11" fill="#7EE7FF" letter-spacing="3">
+            <textPath href="#circle-path" startOffset="0">
+              SCD · COCHABAMBA · BO · 2026 · BUILD THE CLOUD GEN ·
+            </textPath>
+          </text>
+          <rect x="68" y="74" width="40" height="40" rx="11" fill="#00BFF0"/>
+          <rect x="88" y="84" width="40" height="40" rx="11" fill="white"/>
+          <rect x="78" y="78" width="40" height="40" rx="11" fill="none" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+
+    </div>
+
+    <!-- Construction / clear space -->
+    <div class="sec-head" style="margin-top: 64px;">
+      <h2 style="font-size: var(--fs-xl); color: var(--ink-700);">Construction grid · clear space · minimum size</h2>
+      <span class="sec-meta">// based on x-unit (mark-width / 8)</span>
+    </div>
+
+    <div class="construction">
+      <div class="card">
+        <span class="label-tl mono-label">CONSTRUCTION</span>
+        <span class="label-bl">8u × 8u baseline</span>
+        <svg width="180" height="180" viewBox="0 0 200 200" fill="none">
+          <!-- 8x8 grid -->
+          <g stroke="#dde2ec" stroke-width="0.5">
+            <path d="M0 25 H200 M0 50 H200 M0 75 H200 M0 100 H200 M0 125 H200 M0 150 H200 M0 175 H200" />
+            <path d="M25 0 V200 M50 0 V200 M75 0 V200 M100 0 V200 M125 0 V200 M150 0 V200 M175 0 V200" />
+          </g>
+          <rect x="20"  y="40"  width="100" height="100" rx="26" fill="#06175D" opacity="0.9"/>
+          <rect x="80"  y="60"  width="100" height="100" rx="26" fill="#00BFF0" opacity="0.85"/>
+          <rect x="50"  y="50"  width="100" height="100" rx="26" fill="none" stroke="#06175D" stroke-width="2"/>
+          <!-- annotations -->
+          <line x1="20" y1="190" x2="180" y2="190" stroke="#00BFF0" stroke-width="1"/>
+          <text x="100" y="186" font-family="JetBrains Mono" font-size="9" fill="#009DC8" text-anchor="middle">8u</text>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="label-tl mono-label">CLEAR SPACE</span>
+        <span class="label-bl">≥ 2u on every side</span>
+        <svg width="200" height="160" viewBox="0 0 240 200" fill="none">
+          <rect x="40" y="40" width="160" height="120" rx="6" fill="none" stroke="#dde2ec" stroke-dasharray="3 3"/>
+          <rect x="60" y="60" width="120" height="80" rx="0" fill="#eef1f8"/>
+          <g transform="translate(78, 70)">
+            <rect x="0"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+            <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+            <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2"/>
+            <text x="68" y="38" font-family="Space Grotesk" font-size="14" font-weight="600" fill="#06175D">SCD·26</text>
+          </g>
+          <line x1="40" y1="180" x2="60" y2="180" stroke="#00BFF0"/>
+          <text x="50" y="195" font-family="JetBrains Mono" font-size="9" fill="#009DC8" text-anchor="middle">2u</text>
+        </svg>
+      </div>
+      <div class="card">
+        <span class="label-tl mono-label">MINIMUM SIZE</span>
+        <span class="label-bl">24px digital · 8mm print</span>
+        <div style="display: flex; gap: 28px; align-items: flex-end;">
+          <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+            <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+              <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+              <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+              <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+            </svg>
+            <span style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-400);">24px</span>
+          </div>
+          <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+            <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+              <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+              <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+            </svg>
+            <span style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-400);">40px</span>
+          </div>
+          <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="6"  y="14" width="32" height="32" rx="9" fill="#06175D"/>
+              <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
+              <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
+            </svg>
+            <span style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-400);">64px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== 02 COLOR =========== -->
+  <section id="color">
+    <div class="sec-eyebrow">02 / Color</div>
+    <div class="sec-head">
+      <h2>Palette &amp; tokens</h2>
+      <span class="sec-meta">// hsl-aware · oklch-tuned</span>
+    </div>
+    <p class="sec-lede">UPB <span class="mono-code">#06175D</span> is the structural anchor. Cyan is the accent / signal layer for CTAs, links, and live highlights. Cool-tinted neutrals carry the body content. Use cyan sparingly — it should always feel like a <em>signal</em>, not a fill.</p>
+
+    <!-- UPB Navy palette -->
+    <div class="palette-row">
+      <div class="palette-name">
+        <h3>UPB Navy</h3>
+        <span class="desc">— Primary brand · structural surfaces, headlines, hero backgrounds</span>
+        <span class="mono-code" style="margin-left: auto;">--upb-navy-{50…950}</span>
+      </div>
+      <div class="palette">
+        <div class="swatch" style="background: var(--upb-navy-50); color: var(--upb-navy-700);"><span class="step">50</span><span class="hex">#EEF1F8</span></div>
+        <div class="swatch" style="background: var(--upb-navy-100); color: var(--upb-navy-700);"><span class="step">100</span><span class="hex">#D4DAEA</span></div>
+        <div class="swatch" style="background: var(--upb-navy-200); color: var(--upb-navy-800);"><span class="step">200</span><span class="hex">#A6B3D2</span></div>
+        <div class="swatch" style="background: var(--upb-navy-300); color: white;"><span class="step">300</span><span class="hex">#6B7EB0</span></div>
+        <div class="swatch" style="background: var(--upb-navy-400); color: white;"><span class="step">400</span><span class="hex">#364F8C</span></div>
+        <div class="swatch" style="background: var(--upb-navy-500); color: white; outline: 2px solid var(--cyan-400); outline-offset: 2px;"><span class="step">500 ●</span><span class="hex">#06175D</span></div>
+        <div class="swatch" style="background: var(--upb-navy-600); color: white;"><span class="step">600</span><span class="hex">#051349</span></div>
+        <div class="swatch" style="background: var(--upb-navy-700); color: white;"><span class="step">700</span><span class="hex">#040F3A</span></div>
+        <div class="swatch" style="background: var(--upb-navy-800); color: white;"><span class="step">800</span><span class="hex">#030A29</span></div>
+        <div class="swatch" style="background: var(--upb-navy-900); color: var(--cyan-300);"><span class="step">900</span><span class="hex">#02071A</span></div>
+        <div class="swatch" style="background: var(--upb-navy-950); color: var(--cyan-300);"><span class="step">950</span><span class="hex">#01040F</span></div>
+      </div>
+    </div>
+
+    <!-- Cyan -->
+    <div class="palette-row">
+      <div class="palette-name">
+        <h3>Signal Cyan</h3>
+        <span class="desc">— Accent · CTAs, links, live indicators, focus rings</span>
+        <span class="mono-code" style="margin-left: auto;">--cyan-{50…700}</span>
+      </div>
+      <div class="palette" style="grid-template-columns: repeat(8, 1fr);">
+        <div class="swatch" style="background: var(--cyan-50); color: var(--cyan-700);"><span class="step">50</span><span class="hex">#E6FBFF</span></div>
+        <div class="swatch" style="background: var(--cyan-100); color: var(--cyan-700);"><span class="step">100</span><span class="hex">#B8F3FF</span></div>
+        <div class="swatch" style="background: var(--cyan-200); color: var(--cyan-700);"><span class="step">200</span><span class="hex">#7EE7FF</span></div>
+        <div class="swatch" style="background: var(--cyan-300); color: var(--cyan-700);"><span class="step">300</span><span class="hex">#38D6FF</span></div>
+        <div class="swatch" style="background: var(--cyan-400); color: var(--upb-navy-700); outline: 2px solid var(--upb-navy-500); outline-offset: 2px;"><span class="step">400 ●</span><span class="hex">#00BFF0</span></div>
+        <div class="swatch" style="background: var(--cyan-500); color: white;"><span class="step">500</span><span class="hex">#009DC8</span></div>
+        <div class="swatch" style="background: var(--cyan-600); color: white;"><span class="step">600</span><span class="hex">#007EA3</span></div>
+        <div class="swatch" style="background: var(--cyan-700); color: white;"><span class="step">700</span><span class="hex">#035E7A</span></div>
+      </div>
+    </div>
+
+    <!-- Neutrals -->
+    <div class="palette-row">
+      <div class="palette-name">
+        <h3>Ink (neutrals)</h3>
+        <span class="desc">— Cool-tinted; body text, surfaces, borders</span>
+        <span class="mono-code" style="margin-left: auto;">--ink-{0…950}</span>
+      </div>
+      <div class="palette">
+        <div class="swatch" style="background: var(--ink-0); color: var(--ink-700); border: 1px solid var(--ink-100);"><span class="step">0</span><span class="hex">#FFFFFF</span></div>
+        <div class="swatch" style="background: var(--ink-50); color: var(--ink-700);"><span class="step">50</span><span class="hex">#F5F7FA</span></div>
+        <div class="swatch" style="background: var(--ink-100); color: var(--ink-700);"><span class="step">100</span><span class="hex">#ECEFF5</span></div>
+        <div class="swatch" style="background: var(--ink-200); color: var(--ink-700);"><span class="step">200</span><span class="hex">#DDE2EC</span></div>
+        <div class="swatch" style="background: var(--ink-300); color: var(--ink-800);"><span class="step">300</span><span class="hex">#C2CAD9</span></div>
+        <div class="swatch" style="background: var(--ink-400); color: white;"><span class="step">400</span><span class="hex">#8A93A6</span></div>
+        <div class="swatch" style="background: var(--ink-500); color: white;"><span class="step">500</span><span class="hex">#5B6478</span></div>
+        <div class="swatch" style="background: var(--ink-600); color: white;"><span class="step">600</span><span class="hex">#3D4557</span></div>
+        <div class="swatch" style="background: var(--ink-700); color: white;"><span class="step">700</span><span class="hex">#262D3D</span></div>
+        <div class="swatch" style="background: var(--ink-800); color: white;"><span class="step">800</span><span class="hex">#161B29</span></div>
+        <div class="swatch" style="background: var(--ink-900); color: var(--cyan-300);"><span class="step">900</span><span class="hex">#0A0D17</span></div>
+      </div>
+    </div>
+
+    <!-- Semantic -->
+    <div class="palette-row" style="margin-top: 32px;">
+      <div class="palette-name">
+        <h3>Semantic</h3>
+        <span class="desc">— Status, feedback, system messages</span>
+      </div>
+      <div class="sem-grid">
+        <div class="sem-cell"><span class="dot" style="background: var(--upb-navy-500);"></span><span class="name">brand · upb-navy-500</span><span class="hex">#06175D</span><span class="use">Primary surfaces, headlines</span></div>
+        <div class="sem-cell"><span class="dot" style="background: var(--success);"></span><span class="name">success</span><span class="hex">#16A36A</span><span class="use">Confirmations, ticket-issued</span></div>
+        <div class="sem-cell"><span class="dot" style="background: var(--warning);"></span><span class="name">warning</span><span class="hex">#D68A14</span><span class="use">Schedule changes, capacity</span></div>
+        <div class="sem-cell"><span class="dot" style="background: var(--danger);"></span><span class="name">danger</span><span class="hex">#D8425A</span><span class="use">Errors, sold-out, cancelled</span></div>
+      </div>
+    </div>
+
+    <!-- Dark/light usage rules -->
+    <div class="card" style="margin-top: 32px; padding: 32px; background: var(--ink-50); border: var(--border);">
+      <div class="mono-label" style="margin-bottom: 12px;">// usage rules · dark vs light surfaces</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <h4 class="h4" style="margin: 0 0 10px;">Dark surfaces (hero, footer, code)</h4>
+          <ul style="font-size: 14px; color: var(--ink-700); padding-left: 18px; line-height: 1.7;">
+            <li>Background: <code class="mono-code">navy-700</code> or <code class="mono-code">ink-900</code></li>
+            <li>Body text: <code class="mono-code">rgba(255,255,255,0.78)</code></li>
+            <li>Accent text: <code class="mono-code">cyan-300</code> · never cyan-400 on dark</li>
+            <li>Borders: <code class="mono-code">rgba(255,255,255,0.08)</code></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="h4" style="margin: 0 0 10px;">Light surfaces (content, agenda, forms)</h4>
+          <ul style="font-size: 14px; color: var(--ink-700); padding-left: 18px; line-height: 1.7;">
+            <li>Background: <code class="mono-code">ink-25 / ink-50</code> · cards <code class="mono-code">ink-0</code></li>
+            <li>Body text: <code class="mono-code">ink-700</code> · headings <code class="mono-code">navy-500</code></li>
+            <li>Accent text: <code class="mono-code">cyan-600</code> · borders <code class="mono-code">ink-200</code></li>
+            <li>Focus ring: <code class="mono-code">cyan-400</code> @ 15% alpha · 3px</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== 03 TYPOGRAPHY =========== -->
+  <section id="type">
+    <div class="sec-eyebrow">03 / Typography</div>
+    <div class="sec-head">
+      <h2>Type system</h2>
+      <span class="sec-meta">// Space Grotesk + JetBrains Mono</span>
+    </div>
+    <p class="sec-lede">Two families. <strong>Space Grotesk</strong> for everything voice-bearing — headlines, UI, body. <strong>JetBrains Mono</strong> for technical signal — labels, code, metadata, timestamps. Use mono short and uppercase as a "system voice."</p>
+
+    <div class="card" style="padding: 0;">
+      <div class="type-row" style="padding: 32px;">
+        <div class="type-meta"><span class="name">display-1 / 112</span>500 · -4% tracking<br/>line-height 0.92</div>
+        <div class="type-sample"><span class="display-1">Build the<br/>Cloud Gen.</span></div>
+      </div>
+      <div class="type-row" style="padding: 32px;">
+        <div class="type-meta"><span class="name">display-2 / 84</span>500 · -3.5% tracking</div>
+        <div class="type-sample"><span class="display-2">Cochabamba calling.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">h1 / 64</span>500 · -3% tracking</div>
+        <div class="type-sample"><span class="h1">Cuatro tracks. Un día. Sin filtro.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">h2 / 48</span>500 · -2.5% tracking</div>
+        <div class="type-sample"><span class="h2">Speakers · talleres · networking.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">h3 / 38</span>500 · -2% tracking</div>
+        <div class="type-sample"><span class="h3">Section heading example.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">h4 / 24</span>600 · -1% tracking</div>
+        <div class="type-sample"><span class="h4">Subsection heading example.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">body-lg / 18</span>400 · 1.55 leading</div>
+        <div class="type-sample"><span class="body-lg">Estudiantes, builders y comunidades convergen un día en UPB Cochabamba para construir, romper y volver a desplegar — en el aula y en la nube.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">body / 16</span>400 · 1.55 leading</div>
+        <div class="type-sample"><span class="body">Default body copy. Use for paragraphs, longer descriptions, and most text content. Pairs with mono labels for technical context.</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">mono / label</span>JetBrains Mono · 11 / 0.08em</div>
+        <div class="type-sample"><span class="mono-label" style="font-size: 13px;">// 04 — DEVOPS &amp; AUTOMATION</span></div>
+      </div>
+      <div class="type-row" style="padding: 24px 32px;">
+        <div class="type-meta"><span class="name">mono / code</span>JetBrains Mono · 14 · 500</div>
+        <div class="type-sample"><code class="mono-code">aws scd register --track devops --student true</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== 04 SPACING & GRID =========== -->
+  <section id="spacing">
+    <div class="sec-eyebrow">04 / Spacing &amp; Grid</div>
+    <div class="sec-head">
+      <h2>Rhythm system</h2>
+      <span class="sec-meta">// 4px base unit</span>
+    </div>
+    <p class="sec-lede">All spacing is multiples of <strong>4px</strong>. Layout grid is 12 columns at 1280px max-width with 24px gutters. Rhythm scale below shows the canonical token set.</p>
+
+    <div class="spacing-grid">
+      <div class="sp-cell"><div class="bar" style="width: 4px;"></div><div class="meta"><strong>sp-1</strong>4px · hairline</div></div>
+      <div class="sp-cell"><div class="bar" style="width: 8px;"></div><div class="meta"><strong>sp-2</strong>8px · inline gaps</div></div>
+      <div class="sp-cell"><div class="bar" style="width: 16px;"></div><div class="meta"><strong>sp-4</strong>16px · field padding</div></div>
+      <div class="sp-cell"><div class="bar" style="width: 24px;"></div><div class="meta"><strong>sp-6</strong>24px · card padding</div></div>
+      <div class="sp-cell"><div class="bar" style="width: 48px;"></div><div class="meta"><strong>sp-12</strong>48px · section gap</div></div>
+      <div class="sp-cell"><div class="bar" style="width: 96px;"></div><div class="meta"><strong>sp-24</strong>96px · major break</div></div>
+    </div>
+  </section>
+
+  <!-- =========== 05 COMPONENTS =========== -->
+  <section id="components">
+    <div class="sec-eyebrow">05 / Components</div>
+    <div class="sec-head">
+      <h2>Buttons, fields, badges</h2>
+      <span class="sec-meta">// react-ready primitives</span>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="mono-label" style="margin-bottom: 18px;">// buttons / variants × sizes × states</div>
+
+      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: center; padding: 12px 0; border-bottom: var(--border);">
+        <span class="mono-label">primary</span>
+        <div class="btn-group">
+          <button class="btn btn-primary btn-sm">Register</button>
+          <button class="btn btn-primary">Register now <span class="arrow">→</span></button>
+          <button class="btn btn-primary btn-lg">Get my ticket <span class="arrow">→</span></button>
+          <button class="btn btn-primary" disabled style="opacity: 0.45; cursor: not-allowed;">Sold out</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: center; padding: 12px 0; border-bottom: var(--border);">
+        <span class="mono-label">cyan / signal</span>
+        <div class="btn-group">
+          <button class="btn btn-cyan btn-sm">Submit CFP</button>
+          <button class="btn btn-cyan">Submit a talk <span class="arrow">→</span></button>
+          <button class="btn btn-cyan btn-lg">Become speaker <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: center; padding: 12px 0; border-bottom: var(--border);">
+        <span class="mono-label">ghost</span>
+        <div class="btn-group">
+          <button class="btn btn-ghost btn-sm">View tracks</button>
+          <button class="btn btn-ghost">View tracks</button>
+          <button class="btn btn-ghost btn-lg">Read the docs</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: center; padding: 12px 0;">
+        <span class="mono-label">mono / cli</span>
+        <div class="btn-group">
+          <button class="btn btn-mono">$ register --upb</button>
+          <button class="btn btn-mono">$ scd open --2026</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="mono-label" style="margin-bottom: 18px;">// fields / registration form</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" value="Camila Quiroga Vargas" />
+          <div class="hint">As shown on your student ID</div>
+        </div>
+        <div class="field">
+          <label>Email · institutional</label>
+          <input type="email" value="camila.quiroga@upb.edu" />
+          <div class="hint">@upb.edu preferred · others welcome</div>
+        </div>
+        <div class="field">
+          <label>University / Institution</label>
+          <select>
+            <option>Universidad Privada Boliviana — UPB</option>
+            <option>Universidad Mayor de San Simón — UMSS</option>
+            <option>Universidad Católica Boliviana — UCB</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Year / Semester</label>
+          <input type="text" value="6° semestre · Sistemas" />
+        </div>
+        <div class="field" style="grid-column: span 2;">
+          <label>Tracks of interest</label>
+          <div class="checkbox-group" style="margin-top: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+            <span class="check checked"><span class="box"></span>Cloud Fundamentals</span>
+            <span class="check checked"><span class="box"></span>DevOps &amp; Automation</span>
+            <span class="check"><span class="box"></span>AI + AWS</span>
+            <span class="check"><span class="box"></span>Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BADGES -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="mono-label" style="margin-bottom: 18px;">// badges &amp; tags</div>
+      <div class="badge-row">
+        <span class="badge navy"><span class="dot"></span>Cloud Fundamentals</span>
+        <span class="badge cyan"><span class="dot"></span>DevOps</span>
+        <span class="badge" style="background: #f3edff; color: #6a3fc6;"><span class="dot" style="background: #6a3fc6;"></span>AI + AWS</span>
+        <span class="badge" style="background: #fde9ed; color: #b53651;"><span class="dot" style="background: #b53651;"></span>Security</span>
+        <span class="badge success"><span class="dot"></span>Registered</span>
+        <span class="badge warning"><span class="dot"></span>Almost full</span>
+        <span class="badge outline">Workshop · 90min</span>
+        <span class="badge outline">EN / ES</span>
+        <span class="badge dark" style="background: var(--upb-navy-700); color: var(--cyan-300);">● LIVE</span>
+      </div>
+    </div>
+
+    <!-- SPEAKER CARDS -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="mono-label" style="margin-bottom: 18px;">// speaker card · 3-up grid</div>
+      <div class="cards-grid">
+
+        <article class="speaker-card">
+          <div class="photo">
+            <span class="num">SP/01</span>
+            <span class="ph">[ SPEAKER PHOTO ]</span>
+          </div>
+          <div class="body">
+            <h3 class="name">Diego Aramayo</h3>
+            <div class="role">AWS Community Builder · Solutions Architect</div>
+            <span class="badge cyan"><span class="dot"></span>DevOps</span>
+          </div>
+        </article>
+
+        <article class="speaker-card">
+          <div class="photo">
+            <span class="num">SP/02</span>
+            <span class="ph">[ SPEAKER PHOTO ]</span>
+          </div>
+          <div class="body">
+            <h3 class="name">Valeria Choquehuanca</h3>
+            <div class="role">CTO · Llama Labs · Cochabamba</div>
+            <span class="badge" style="background: #f3edff; color: #6a3fc6;"><span class="dot" style="background: #6a3fc6;"></span>AI + AWS</span>
+          </div>
+        </article>
+
+        <article class="speaker-card">
+          <div class="photo">
+            <span class="num">SP/03</span>
+            <span class="ph">[ SPEAKER PHOTO ]</span>
+          </div>
+          <div class="body">
+            <h3 class="name">Ignacio Terán</h3>
+            <div class="role">Senior Engineer · Local startup founder</div>
+            <span class="badge navy"><span class="dot"></span>Cloud Fundamentals</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- AGENDA CARDS -->
+    <div class="card">
+      <div class="mono-label" style="margin-bottom: 18px;">// agenda row · stacked list</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        <div class="agenda-card">
+          <div class="time">09:00<span class="dur">90 min · Aula M-1</span></div>
+          <div>
+            <h4 class="title">Opening keynote — Why the cloud generation lives in Cochabamba</h4>
+            <div class="who">Diego Aramayo · AWS Community Builder</div>
+          </div>
+          <span class="track-tag track-cloud">Cloud</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="time">11:00<span class="dur">120 min · Lab D-3</span></div>
+          <div>
+            <h4 class="title">Hands-on workshop — From <code class="mono-code">git push</code> to production with CDK</h4>
+            <div class="who">Valeria Choquehuanca · CTO @ Llama Labs</div>
+          </div>
+          <span class="track-tag track-devops">DevOps</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="time">14:30<span class="dur">60 min · Auditorio</span></div>
+          <div>
+            <h4 class="title">Bedrock para estudiantes — RAG sin morir intentándolo</h4>
+            <div class="who">Ignacio Terán · Local engineer + founder</div>
+          </div>
+          <span class="track-tag track-ai">AI</span>
+        </div>
+
+        <div class="agenda-card">
+          <div class="time">16:30<span class="dur">75 min · Aula M-2</span></div>
+          <div>
+            <h4 class="title">Threat-modeling for student projects · IAM sin pánico</h4>
+            <div class="who">Panel · Local engineers</div>
+          </div>
+          <span class="track-tag track-sec">Security</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== TERMINAL MOTIF =========== -->
+  <section>
+    <div class="sec-eyebrow">06 / Voice — terminal motif</div>
+    <div class="sec-head">
+      <h2>The system speaks in mono</h2>
+      <span class="sec-meta">// for hero CTAs, stat blocks, easter eggs</span>
+    </div>
+    <p class="sec-lede">A signature element: a small, real-feeling terminal block that runs in heroes, footers and registration confirmations. Use it sparingly — it's the brand's wink.</p>
+
+    <div class="terminal">
+      <div class="bar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="title">scd-26 · ~/cochabamba — bash</div>
+      </div>
+      <div class="body">
+<span class="prompt">scd@upb</span> <span class="meta">~/2026</span> <span class="prompt">$</span> <span class="cmd">scd register --student --track devops</span><br>
+<span class="out">→ resolving universities ...........</span>  <span class="ok">ok</span><br>
+<span class="out">→ verifying @upb.edu ...............</span>  <span class="ok">ok</span><br>
+<span class="out">→ allocating wristband #SCD-0427 ..</span>  <span class="ok">ok</span><br>
+<br>
+<span class="prompt">scd@upb</span> <span class="meta">~/2026</span> <span class="prompt">$</span> <span class="cmd">cat welcome.txt</span><br>
+<span class="out">> bienvenida, builder.</span><br>
+<span class="out">> nos vemos el 17.10.2026 — UPB Cochabamba.</span><br>
+<span class="out">> trae laptop, paciencia y curiosidad.</span><br>
+<br>
+<span class="prompt">scd@upb</span> <span class="meta">~/2026</span> <span class="prompt">$</span> <span class="blink"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== ICONS =========== -->
+  <section>
+    <div class="sec-eyebrow">07 / Iconography</div>
+    <div class="sec-head">
+      <h2>1.5px stroke · 24×24 grid</h2>
+      <span class="sec-meta">// rounded joins · cyan accents allowed</span>
+    </div>
+    <p class="sec-lede">Stroke icons only. <code class="mono-code">stroke-width: 1.5</code>, rounded line-cap and joins, 24×24 viewBox. Filled-in dots are reserved for live/status indicators. No 3D, no skeumorphism, no emoji.</p>
+
+    <div class="icon-row">
+      <!-- cloud -->
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 18h10a4 4 0 0 0 0-8 5 5 0 0 0-9.9-1A4 4 0 0 0 7 18Z"/>
+        </svg>
+        <span class="lab">cloud</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/>
+          <circle cx="7" cy="7" r="0.8" fill="#00BFF0" stroke="none"/>
+          <circle cx="7" cy="17" r="0.8" fill="#00BFF0" stroke="none"/>
+        </svg>
+        <span class="lab">stack</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9-3 3 3 3"/><path d="m18 9 3 3-3 3"/><path d="m14 4-4 16"/>
+        </svg>
+        <span class="lab">code</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 4 7v6c0 4 3.5 7 8 8 4.5-1 8-4 8-8V7Z"/>
+        </svg>
+        <span class="lab">security</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3.2"/>
+          <path d="M5 20a7 7 0 0 1 14 0"/>
+        </svg>
+        <span class="lab">speaker</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M3 10h18M8 3v4M16 3v4"/>
+        </svg>
+        <span class="lab">agenda</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span class="lab">time</span>
+      </div>
+      <div class="icon-cell">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06175D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11Z"/>
+          <circle cx="12" cy="10" r="2.4"/>
+        </svg>
+        <span class="lab">venue</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== STAMPS / BADGES =========== -->
+  <section>
+    <div class="sec-eyebrow">08 / Stamps &amp; brand marks</div>
+    <div class="sec-head">
+      <h2>Event seals</h2>
+      <span class="sec-meta">// circular, hexagonal &amp; sticker formats</span>
+    </div>
+    <p class="sec-lede">Use stamps on swag, certificates, social-card endcaps, and the wristband. They feel official and collectible — pair them with the terminal motif for tone variety.</p>
+
+    <div class="stamps-row">
+      <div class="stamp-card dark">
+        <span class="label">Stamp / circular dark</span>
+        <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+          <defs><path id="cp1" d="M 100, 100 m -78, 0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"/></defs>
+          <circle cx="100" cy="100" r="92" stroke="#7EE7FF" stroke-width="1" fill="none"/>
+          <circle cx="100" cy="100" r="78" stroke="#00BFF0" stroke-width="1" stroke-dasharray="2 4"/>
+          <text font-family="JetBrains Mono" font-size="11" fill="#7EE7FF" letter-spacing="3">
+            <textPath href="#cp1" startOffset="0">SCD · COCHABAMBA · BO · 2026 · BUILD THE CLOUD GEN ·</textPath>
+          </text>
+          <rect x="68" y="74" width="40" height="40" rx="11" fill="#00BFF0"/>
+          <rect x="88" y="84" width="40" height="40" rx="11" fill="white"/>
+          <rect x="78" y="78" width="40" height="40" rx="11" fill="none" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="stamp-card" style="background: var(--cyan-50);">
+        <span class="label" style="color: var(--cyan-700);">Stamp / circular light</span>
+        <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+          <defs><path id="cp2" d="M 100, 100 m -78, 0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"/></defs>
+          <circle cx="100" cy="100" r="92" stroke="#06175D" stroke-width="1" fill="none"/>
+          <circle cx="100" cy="100" r="78" stroke="#06175D" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <text font-family="JetBrains Mono" font-size="11" fill="#06175D" letter-spacing="3">
+            <textPath href="#cp2" startOffset="0">UPB · STUDENT COMMUNITY DAY · 17.10.2026 · </textPath>
+          </text>
+          <rect x="68" y="74" width="40" height="40" rx="11" fill="#06175D"/>
+          <rect x="88" y="84" width="40" height="40" rx="11" fill="#00BFF0"/>
+          <rect x="78" y="78" width="40" height="40" rx="11" fill="none" stroke="#06175D" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="stamp-card" style="background: var(--upb-navy-500);">
+        <span class="label" style="color: rgba(255,255,255,0.6);">Hex badge / track</span>
+        <svg width="150" height="150" viewBox="0 0 200 200" fill="none">
+          <polygon points="100,10 180,55 180,145 100,190 20,145 20,55" fill="none" stroke="#7EE7FF" stroke-width="1.5"/>
+          <polygon points="100,28 168,64 168,136 100,172 32,136 32,64" fill="none" stroke="#00BFF0" stroke-width="0.5" stroke-dasharray="2 3"/>
+          <text x="100" y="92" font-family="JetBrains Mono" font-size="11" fill="#7EE7FF" text-anchor="middle" letter-spacing="2">TRACK</text>
+          <text x="100" y="118" font-family="Space Grotesk" font-weight="600" font-size="32" fill="white" text-anchor="middle" letter-spacing="-1">04</text>
+          <text x="100" y="138" font-family="JetBrains Mono" font-size="9" fill="#7EE7FF" text-anchor="middle" letter-spacing="2">SECURITY</text>
+        </svg>
+      </div>
+
+      <div class="stamp-card" style="background: white;">
+        <span class="label">Wristband / sticker</span>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+          <div style="background: var(--cyan-400); padding: 8px 14px; border-radius: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--upb-navy-700); letter-spacing: 0.1em;">VIP · SP-001</div>
+          <div style="background: var(--upb-navy-500); padding: 12px 18px; border-radius: 4px; font-family: var(--font-display); font-size: 18px; color: white; font-weight: 600; letter-spacing: -0.02em;">SCD·26</div>
+          <div style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-400); letter-spacing: 0.08em;">BUILD · BREAK · DEPLOY</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== PATTERNS =========== -->
+  <section id="patterns">
+    <div class="sec-eyebrow">09 / Patterns &amp; textures</div>
+    <div class="sec-head">
+      <h2>Backgrounds &amp; surface treatments</h2>
+      <span class="sec-meta">// 6 canonical textures</span>
+    </div>
+    <p class="sec-lede">Pair a flat surface with one texture. Don't stack textures — that breaks the calm-tech feel. <strong>Aurora</strong> is reserved for hero sections only; <strong>blueprint</strong> can be used liberally.</p>
+
+    <div class="pattern-row" style="margin-bottom: 16px;">
+      <div class="pattern-tile pat-grid"><span class="tag">[01] BLUEPRINT — hero, dividers</span></div>
+      <div class="pattern-tile pat-aurora"><span class="tag">[02] AURORA — hero only</span></div>
+      <div class="pattern-tile pat-stripe"><span class="tag">[03] DIAGONAL — section ends</span></div>
+    </div>
+    <div class="pattern-row">
+      <div class="pattern-tile pat-dot"><span class="tag">[04] DOT FIELD — light hero</span></div>
+      <div class="pattern-tile pat-circuit">
+        <span class="tag">[05] CIRCUIT — code surfaces</span>
+        <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0;">
+          <g stroke="#00BFF0" stroke-width="0.6" fill="none" opacity="0.55">
+            <path d="M0 60 H140 V100 H260 V60 H400"/>
+            <path d="M0 160 H80 V200 H180 V240 H320 V200 H400"/>
+            <path d="M0 260 H60 V230 H110"/>
+          </g>
+          <g fill="#7EE7FF">
+            <circle cx="140" cy="60" r="2"/>
+            <circle cx="260" cy="60" r="2"/>
+            <circle cx="180" cy="200" r="2"/>
+            <circle cx="320" cy="200" r="2"/>
+            <circle cx="60" cy="260" r="2"/>
+          </g>
+        </svg>
+      </div>
+      <div class="pattern-tile pat-cloud" style="display: flex; align-items: center; justify-content: center;">
+        <span class="tag" style="color: var(--upb-navy-500); background: rgba(255,255,255,0.7);">[06] NODE-STACK — content</span>
+        <svg width="180" height="120" viewBox="0 0 200 130" fill="none">
+          <g opacity="0.9">
+            <rect x="10"  y="20" width="60" height="60" rx="14" fill="#06175D" opacity="0.18"/>
+            <rect x="50"  y="40" width="60" height="60" rx="14" fill="#06175D" opacity="0.28"/>
+            <rect x="90"  y="20" width="60" height="60" rx="14" fill="#00BFF0" opacity="0.4"/>
+            <rect x="130" y="40" width="60" height="60" rx="14" fill="#06175D" opacity="0.18"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== MOTION =========== -->
+  <section id="motion">
+    <div class="sec-eyebrow">10 / Motion</div>
+    <div class="sec-head">
+      <h2>Easing &amp; durations</h2>
+      <span class="sec-meta">// confident, not playful</span>
+    </div>
+    <p class="sec-lede">Motion is short, decisive and cubic. Default to <code class="mono-code">200ms · ease-out</code>. Reserve longer durations (380ms) for entrances. Never bounce. Stagger lists by 40ms increments.</p>
+
+    <div class="motion-grid">
+      <div class="motion-card">
+        <div class="name">Fast</div>
+        <svg viewBox="0 0 120 60" width="100%" height="60">
+          <path d="M0 60 C 10 0, 20 0, 120 0" stroke="#00BFF0" stroke-width="2" fill="none"/>
+        </svg>
+        <div class="vals">120ms · ease-out<br/>hover, micro-feedback</div>
+      </div>
+      <div class="motion-card">
+        <div class="name">Base</div>
+        <svg viewBox="0 0 120 60" width="100%" height="60">
+          <path d="M0 60 C 30 60, 40 0, 120 0" stroke="#06175D" stroke-width="2" fill="none"/>
+        </svg>
+        <div class="vals">200ms · ease-out<br/>default for everything</div>
+      </div>
+      <div class="motion-card">
+        <div class="name">Slow</div>
+        <svg viewBox="0 0 120 60" width="100%" height="60">
+          <path d="M0 60 C 60 60, 60 0, 120 0" stroke="#06175D" stroke-width="2" fill="none"/>
+        </svg>
+        <div class="vals">380ms · ease-in-out<br/>page entrances, modals</div>
+      </div>
+      <div class="motion-card">
+        <div class="name">Stagger</div>
+        <svg viewBox="0 0 120 60" width="100%" height="60">
+          <g fill="#00BFF0">
+            <rect x="0"  y="32" width="20" height="20" rx="4"/>
+            <rect x="26" y="22" width="20" height="20" rx="4" opacity="0.7"/>
+            <rect x="52" y="14" width="20" height="20" rx="4" opacity="0.45"/>
+            <rect x="78" y="8"  width="20" height="20" rx="4" opacity="0.25"/>
+          </g>
+        </svg>
+        <div class="vals">+40ms per item<br/>list entrances</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>SCD·26 — Design system v1.0 · UPB Cochabamba · Bolivia</span>
+    <span><a href="landing.html">→ See landing preview</a></span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+/* ============================================
+   AWS Student Community Day — Cochabamba 2026
+   Design Tokens
+   ============================================ */
+
+:root {
+  /* — Brand —————————————————————————————— */
+  --upb-navy-50:  #eef1f8;
+  --upb-navy-100: #d4daea;
+  --upb-navy-200: #a6b3d2;
+  --upb-navy-300: #6b7eb0;
+  --upb-navy-400: #364f8c;
+  --upb-navy-500: #06175D;  /* Primary — UPB */
+  --upb-navy-600: #051349;
+  --upb-navy-700: #040f3a;
+  --upb-navy-800: #030a29;
+  --upb-navy-900: #02071a;
+  --upb-navy-950: #01040f;
+
+  /* — Accent: Electric cyan ——————————————— */
+  --cyan-50:  #e6fbff;
+  --cyan-100: #b8f3ff;
+  --cyan-200: #7ee7ff;
+  --cyan-300: #38d6ff;
+  --cyan-400: #00bff0;  /* Accent — primary */
+  --cyan-500: #009dc8;
+  --cyan-600: #007ea3;
+  --cyan-700: #035e7a;
+
+  /* — Neutrals (cool-tinted) ——————————————— */
+  --ink-0:    #ffffff;
+  --ink-25:   #fbfcfd;
+  --ink-50:   #f5f7fa;
+  --ink-100:  #eceff5;
+  --ink-200:  #dde2ec;
+  --ink-300:  #c2cad9;
+  --ink-400:  #8a93a6;
+  --ink-500:  #5b6478;
+  --ink-600:  #3d4557;
+  --ink-700:  #262d3d;
+  --ink-800:  #161b29;
+  --ink-900:  #0a0d17;
+  --ink-950:  #04060c;
+
+  /* — Semantic ————————————————————————— */
+  --success: #16a36a;
+  --warning: #d68a14;
+  --danger:  #d8425a;
+
+  /* — Typography ——————————————————————— */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* — Type scale ——————————————————————— */
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   18px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  30px;
+  --fs-3xl:  38px;
+  --fs-4xl:  48px;
+  --fs-5xl:  64px;
+  --fs-6xl:  84px;
+  --fs-7xl:  112px;
+
+  /* — Spacing (4px base) ————————————————— */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* — Radii ——————————————————————————— */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-full: 9999px;
+
+  /* — Borders / shadows ———————————————— */
+  --border: 1px solid var(--ink-200);
+  --border-strong: 1px solid var(--ink-300);
+  --border-dark: 1px solid rgba(255,255,255,0.08);
+
+  --shadow-xs: 0 1px 2px rgba(6,23,93,0.06);
+  --shadow-sm: 0 2px 6px rgba(6,23,93,0.06), 0 1px 2px rgba(6,23,93,0.04);
+  --shadow-md: 0 8px 24px -8px rgba(6,23,93,0.18), 0 2px 6px rgba(6,23,93,0.06);
+  --shadow-lg: 0 24px 48px -12px rgba(6,23,93,0.24);
+  --glow-cyan: 0 0 0 1px rgba(0,191,240,0.4), 0 8px 24px -4px rgba(0,191,240,0.35);
+
+  /* — Motion ——————————————————————————— */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 380ms;
+}
