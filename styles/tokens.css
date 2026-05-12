@@ -80,6 +80,17 @@
   --sp-20: 80px;
   --sp-24: 96px;
 
+  /* — Layout globals ————————————————————— */
+  --page-max: 1280px;
+  --content-readable: 720px;
+  --content-wide: 64ch;
+  --page-pad-sm: 16px;
+  --page-pad: 24px;
+  --page-pad-md: 40px;
+  --page-pad-lg: 56px;
+  --section-gap: 96px;
+  --nav-offset: 16px;
+
   /* — Radii ——————————————————————————— */
   --r-xs: 4px;
   --r-sm: 6px;
@@ -88,6 +99,8 @@
   --r-xl: 20px;
   --r-2xl: 28px;
   --r-full: 9999px;
+  --surface-radius: var(--r-lg);
+  --hero-radius: var(--r-2xl);
 
   /* — Borders / shadows ———————————————— */
   --border: 1px solid var(--ink-200);

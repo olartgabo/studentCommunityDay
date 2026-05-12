@@ -1,21 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <title>SCD·26 — AWS Student Community Day · Cochabamba</title>
-  <meta name="viewport" content="width=1440" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tokens.css" />
-  <link rel="stylesheet" href="brand.css" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/brand.css" />
+  <script src="scripts/config.js" defer></script>
+  <script src="scripts/apply-config.js" defer></script>
   <style>
     body { background: var(--ink-25); }
 
     /* ===== Topbar ===== */
     .nav-shell {
-      position: sticky; top: 16px; z-index: 50; max-width: 1280px;
-      margin: 16px auto 0; padding: 0 24px;
+      position: sticky; top: var(--nav-offset); z-index: 50; max-width: var(--page-max);
+      margin: var(--nav-offset) auto 0; padding: 0 var(--page-pad);
     }
     .nav {
       background: rgba(4,15,58,0.72);
@@ -59,14 +61,14 @@
 
     /* ===== Hero ===== */
     .hero {
-      max-width: 1280px;
+      max-width: var(--page-max);
       margin: 24px auto 0;
-      padding: 0 24px;
+      padding: 0 var(--page-pad);
     }
     .hero-canvas {
       position: relative; overflow: hidden;
       background: var(--upb-navy-700);
-      border-radius: 24px;
+      border-radius: var(--hero-radius);
       padding: 92px 72px 72px;
       color: white;
       isolation: isolate;
@@ -120,6 +122,7 @@
       cursor: pointer; transition: all var(--dur-base) var(--ease-out);
       text-decoration: none;
     }
+    button.btn { appearance: none; }
     .btn-cyan { background: var(--cyan-400); color: var(--upb-navy-700); }
     .btn-cyan:hover { background: var(--cyan-300); transform: translateY(-1px); }
     .btn-ghost-dark {
@@ -181,7 +184,7 @@
 
     /* ===== Marquee ===== */
     .marquee {
-      max-width: 1280px; margin: 32px auto 0; padding: 0 24px;
+      max-width: var(--page-max); margin: 32px auto 0; padding: 0 var(--page-pad);
     }
     .marquee-inner {
       display: flex; gap: 56px;
@@ -195,7 +198,7 @@
     .marquee-inner .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cyan-400);}
 
     /* ===== Tracks section ===== */
-    .section { max-width: 1280px; margin: 96px auto 0; padding: 0 24px;}
+    .section { max-width: var(--page-max); margin: var(--section-gap) auto 0; padding: 0 var(--page-pad);}
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; gap: 32px;
     }
@@ -324,11 +327,36 @@
     .tag-sec { background: #fde9ed; color: #b53651;}
     .tag-break { background: var(--ink-50); color: var(--ink-600);}
 
+    /* ===== Sponsors ===== */
+    .sponsors-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .sponsor {
+      min-height: 128px;
+      background: white;
+      border: var(--border);
+      border-radius: var(--surface-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+      text-transform: uppercase;
+    }
+    .sponsor.primary {
+      background: var(--upb-navy-500);
+      border-color: var(--upb-navy-600);
+      color: white;
+    }
+
     /* ===== CTA / register ===== */
     .cta-card {
       background: var(--upb-navy-700);
       color: white;
-      border-radius: 24px;
+      border-radius: var(--hero-radius);
       padding: 64px 56px;
       position: relative; overflow: hidden;
       display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
@@ -370,7 +398,7 @@
 
     /* ===== Footer ===== */
     .footer {
-      max-width: 1280px; margin: 96px auto 0; padding: 56px 24px 56px;
+      max-width: var(--page-max); margin: var(--section-gap) auto 0; padding: 56px var(--page-pad) 56px;
       border-top: var(--border);
       display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
     }
@@ -379,7 +407,8 @@
       text-transform: uppercase; color: var(--ink-400); margin: 0 0 16px; font-weight: 500;
     }
     .footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;}
-    .footer ul a {
+    .footer ul a,
+    .footer ul span {
       color: var(--ink-700); text-decoration: none; font-size: 14px;
     }
     .footer ul a:hover { color: var(--upb-navy-500);}
@@ -389,10 +418,38 @@
     .footer .org-block .lockup-mini .wm { color: var(--upb-navy-500); font-size: 18px;}
     .footer .org-block p { font-size: 14px; color: var(--ink-600); line-height: 1.55; margin: 0; max-width: 36ch;}
     .footer-bottom {
-      max-width: 1280px; margin: 0 auto; padding: 0 24px 64px;
+      max-width: var(--page-max); margin: 0 auto; padding: 0 var(--page-pad) 64px;
       display: flex; justify-content: space-between;
       font-family: var(--font-mono); font-size: 11px; color: var(--ink-400);
       letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 980px) {
+      .nav { align-items: flex-start; gap: 16px; }
+      .nav, .nav .left, .nav .right { flex-wrap: wrap; }
+      .nav .links { margin-left: 0 !important; flex-wrap: wrap; gap: 12px 18px; }
+      .hero-canvas { padding: 64px 36px 44px; border-radius: 18px; }
+      .hero-grid, .cta-card, .footer { grid-template-columns: 1fr; }
+      .hero h1, .cta-card h2 { font-size: 64px; letter-spacing: -0.03em; }
+      .hero .stats, .tracks, .speakers, .sponsors-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: block; }
+      .section-head .right { margin-top: 18px; max-width: 62ch; }
+      .schedule .item { grid-template-columns: 110px 1fr; }
+      .schedule .venue, .schedule .tag { justify-self: start; }
+      .footer-bottom { gap: 14px; flex-direction: column; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-shell, .hero, .marquee, .section { padding-left: var(--page-pad-sm); padding-right: var(--page-pad-sm); }
+      .nav .links { display: none; }
+      .hero-canvas { padding: 48px 22px 30px; }
+      .hero h1, .section-head .left h2, .cta-card h2 { font-size: 44px; }
+      .hero .ctas, .cta-card .form .row { flex-direction: column; align-items: stretch; }
+      .hero .stats, .tracks, .speakers, .sponsors-grid, .schedule .item { grid-template-columns: 1fr; }
+      .schedule .item { gap: 10px; padding: 20px; }
+      .cta-card { padding: 40px 22px; }
+      .cta-card .form .meta { flex-direction: column; gap: 6px; }
+      .footer { padding-top: 40px; grid-template-columns: 1fr; gap: 28px; }
     }
   </style>
 </head>
@@ -408,7 +465,7 @@
           <rect x="22" y="22" width="32" height="32" rx="9" fill="white"/>
           <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#7EE7FF" stroke-width="2.5"/>
         </svg>
-        <span class="wm">SCD<span class="dot">·</span><span class="yr">26</span></span>
+        <span class="wm" data-config-text="event.shortName">SCD·26</span>
       </span>
       <span class="links" style="margin-left: 24px;">
         <a href="#tracks"><span>01</span>Tracks</a>
@@ -419,7 +476,7 @@
       </span>
     </div>
     <div class="right">
-      <span class="city"><span class="live"></span>Cochabamba · 17.10.2026</span>
+      <span class="city"><span class="live"></span><span data-config-template="{event.city} · {event.dateDisplay}">Cochabamba · 17.10.2026</span></span>
       <a class="btn btn-cyan" style="padding: 8px 14px; font-size: 13px; border-radius: 8px;" href="#register">Register <span class="arr">→</span></a>
     </div>
   </div>
@@ -431,19 +488,19 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow">
-          <span class="arr">↳</span> AWS Student Community Day · Bolivia
+          <span class="arr">↳</span> <span data-config-text="copy.heroEyebrow">AWS Student Community Day · Bolivia</span>
         </span>
-        <h1>Build the<br/><em>Cloud Generation.</em></h1>
-        <p class="lede">Un día. Cuatro tracks. Estudiantes, builders y comunidades convergen en UPB Cochabamba para construir, romper y desplegar — del aula a la nube. Sin filtro, sin marketing, full hands-on.</p>
+        <h1 data-config-html="copy.heroTitle">Build the<br/><em>Cloud Generation.</em></h1>
+        <p class="lede" data-config-text="copy.heroLede">Un día. Cuatro tracks. Estudiantes, builders y comunidades convergen en UPB Cochabamba para construir, romper y desplegar — del aula a la nube. Sin filtro, sin marketing, full hands-on.</p>
         <div class="ctas">
           <a class="btn btn-cyan" href="#register">Get my ticket <span class="arr">→</span></a>
-          <a class="btn btn-ghost-dark" href="#cfp">Submit a talk</a>
+          <a class="btn btn-ghost-dark" href="mailto:hi@scd-bolivia.dev?subject=CFP%20SCD%2026" data-config-mailto="event.contactEmail" data-config-subject="event.cfpSubject">Submit a talk</a>
         </div>
         <div class="stats">
-          <div class="stat"><div class="v">17 · OCT</div><div class="l">Sábado · 2026</div></div>
+          <div class="stat"><div class="v" data-config-text="event.dateShort">17 · OCT</div><div class="l" data-config-template="{event.weekday} · {event.year}">Sábado · 2026</div></div>
           <div class="stat"><div class="v">04</div><div class="l">Tracks técnicos</div></div>
           <div class="stat"><div class="v">+12</div><div class="l">Speakers · LatAm</div></div>
-          <div class="stat"><div class="v">500</div><div class="l">Cupos · gratis</div></div>
+          <div class="stat"><div class="v" data-config-text="event.capacity">500</div><div class="l">Cupos · gratis</div></div>
         </div>
       </div>
 
@@ -454,17 +511,17 @@
             <span style="margin-left: 8px;">scd-26 · ~/cochabamba — bash</span>
           </div>
           <div class="ht-body">
-<span class="p">scd@upb</span> <span class="o">~/2026</span> <span class="p">$</span> <span class="c">scd register --student</span><br/>
+<span class="p">scd@upb</span> <span class="o" data-config-template="~/{event.year}">~/2026</span> <span class="p">$</span> <span class="c">scd register --student</span><br/>
 <span class="o">→ verifying institution ............</span>  <span class="ok">ok</span><br/>
 <span class="o">→ assigning track .................</span>  <span class="ok">devops</span><br/>
 <span class="o">→ wristband #SCD-0427 .............</span>  <span class="ok">issued</span><br/>
 <br/>
 <span class="p">scd@upb</span> <span class="o">~/2026</span> <span class="p">$</span> <span class="c">cat ./welcome.txt</span><br/>
 <span class="o">> bienvenida, builder.</span><br/>
-<span class="o">> nos vemos el 17.10.2026.</span><br/>
+<span class="o" data-config-template="> nos vemos el {event.dateDisplay}.">> nos vemos el 17.10.2026.</span><br/>
 <span class="o">> trae laptop y curiosidad.</span><br/>
 <br/>
-<span class="p">scd@upb</span> <span class="o">~/2026</span> <span class="p">$</span> <span class="blink"></span>
+<span class="p">scd@upb</span> <span class="o" data-config-template="~/{event.year}">~/2026</span> <span class="p">$</span> <span class="blink"></span>
           </div>
           <div class="ht-meta">
             <span>● 0 errors · 0 warnings</span>
@@ -480,9 +537,9 @@
 <div class="marquee">
   <div class="marquee-inner">
     <span><span class="dot"></span>BUILD · BREAK · DEPLOY</span>
-    <span><span class="dot"></span>UPB · COCHABAMBA · BOLIVIA</span>
-    <span><span class="dot"></span>17 · OCTUBRE · 2026</span>
-    <span><span class="dot"></span>500 BUILDERS</span>
+    <span><span class="dot"></span><span data-config-template="{event.venue} · {event.country}">UPB · COCHABAMBA · BOLIVIA</span></span>
+    <span><span class="dot"></span><span data-config-text="event.dateLong">17 · OCTUBRE · 2026</span></span>
+    <span><span class="dot"></span><span data-config-template="{event.capacity} BUILDERS">500 BUILDERS</span></span>
     <span><span class="dot"></span>4 TRACKS · 12 SPEAKERS</span>
     <span><span class="dot"></span>FREE FOR STUDENTS</span>
     <span><span class="dot"></span>ESPAÑOL · INGLÉS</span>
@@ -711,34 +768,62 @@
   </div>
 </section>
 
+<!-- ===== Sponsors ===== -->
+<section id="sponsors" class="section">
+  <div class="section-head">
+    <div class="left">
+      <span class="eb">// 05 — Sponsors</span>
+      <h2>Aliados que<br/><em>impulsan comunidad.</em></h2>
+    </div>
+    <div class="right">
+      Espacios reservados para partners académicos, comunidades y empresas que apoyan el evento sin romper el foco estudiantil.
+    </div>
+  </div>
+
+  <div class="sponsors-grid" data-config-sponsors>
+    <div class="sponsor primary">UPB Cochabamba</div>
+    <div class="sponsor">AWS Community</div>
+    <div class="sponsor">Community Partner</div>
+    <div class="sponsor">Tech Partner</div>
+  </div>
+</section>
+
 <!-- ===== CTA ===== -->
 <section id="register" class="section">
   <div class="cta-card">
     <div>
       <span class="eyebrow" style="margin-bottom: 18px;">
-        <span class="arr">↳</span> Cupos limitados · 500 wristbands
+        <span class="arr">↳</span> <span data-config-template="Cupos limitados · {event.capacity} wristbands">Cupos limitados · 500 wristbands</span>
       </span>
       <h2>Reservá tu<br/><em>wristband.</em></h2>
       <p>Gratis para estudiantes universitarios. Confirmamos por mail dentro de 48h. Si quedás en lista de espera, te avisamos cuando se libere lugar.</p>
       <div style="display: flex; gap: 28px; font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em;">
-        <span><span style="color: #5fe39d;">●</span> 312 / 500 confirmados</span>
-        <span>WAITLIST · 47</span>
+        <span><span style="color: #5fe39d;">●</span> <span data-config-template="{event.confirmed} / {event.capacity} confirmados">312 / 500 confirmados</span></span>
+        <span data-config-template="WAITLIST · {event.waitlist}">WAITLIST · 47</span>
       </div>
     </div>
-    <div class="form">
+    <form class="form" action="mailto:hi@scd-bolivia.dev" method="post" enctype="text/plain" data-config-mailto="event.contactEmail">
       <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan-300); letter-spacing: 0.06em; margin-bottom: 14px;">// scd-26 / register</div>
-      <div class="row"><input type="text" placeholder="Nombre completo"/></div>
-      <div class="row"><input type="email" placeholder="email@upb.edu"/></div>
-      <div class="row" style="gap: 8px;">
-        <input type="text" placeholder="Universidad" style="flex: 2;"/>
-        <input type="text" placeholder="Año" style="flex: 1;"/>
+      <div class="row">
+        <label class="sr-only" for="full-name">Nombre completo</label>
+        <input id="full-name" name="full-name" type="text" placeholder="Nombre completo" autocomplete="name" required />
       </div>
-      <a class="btn btn-cyan" style="width: 100%; justify-content: center; margin-top: 6px;" href="#">Reservar wristband <span class="arr">→</span></a>
+      <div class="row">
+        <label class="sr-only" for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" placeholder="email@upb.edu" autocomplete="email" required />
+      </div>
+      <div class="row" style="gap: 8px;">
+        <label class="sr-only" for="university">Universidad</label>
+        <input id="university" name="university" type="text" placeholder="Universidad" autocomplete="organization" style="flex: 2;" required />
+        <label class="sr-only" for="year">Año</label>
+        <input id="year" name="year" type="text" placeholder="Año" inputmode="numeric" style="flex: 1;" required />
+      </div>
+      <button class="btn btn-cyan" style="width: 100%; justify-content: center; margin-top: 6px;" type="submit">Reservar wristband <span class="arr">→</span></button>
       <div class="meta">
         <span>● Gratis para estudiantes</span>
         <span>SSL · Encrypted</span>
       </div>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -751,7 +836,7 @@
         <rect x="22" y="22" width="32" height="32" rx="9" fill="#00BFF0"/>
         <rect x="14" y="18" width="32" height="32" rx="9" fill="none" stroke="#06175D" stroke-width="2.5"/>
       </svg>
-      <span class="wm">SCD<span class="dot">·</span><span class="yr">26</span></span>
+      <span class="wm" data-config-text="event.shortName">SCD·26</span>
     </span>
     <p>Student Community Day. Organizado por la comunidad estudiantil de UPB Cochabamba. Hecho por estudiantes, para estudiantes.</p>
     <span class="mono-label">// build · break · deploy</span>
@@ -777,16 +862,16 @@
   <div>
     <h5>Contact</h5>
     <ul>
-      <li><a href="mailto:hi@scd-bolivia.dev">hi@scd-bolivia.dev</a></li>
-      <li><a href="#">@scdbolivia</a></li>
-      <li><a href="#">UPB · Av. Capitán Víctor Ustariz</a></li>
-      <li><a href="#">Cochabamba · Bolivia</a></li>
+      <li><a href="mailto:hi@scd-bolivia.dev" data-config-mailto="event.contactEmail" data-config-text="event.contactEmail">hi@scd-bolivia.dev</a></li>
+      <li><span data-config-text="event.socialHandle">@scdbolivia</span></li>
+      <li><span data-config-text="event.address">UPB · Av. Capitán Víctor Ustariz</span></li>
+      <li><span data-config-template="{event.city} · {event.country}">Cochabamba · Bolivia</span></li>
     </ul>
   </div>
 </div>
 
 <div class="footer-bottom">
-  <span>© 2026 — SCD·26 · Student-organized · UPB Cochabamba</span>
+  <span data-config-template="© {event.year} — {event.shortName} · Student-organized · {event.venue}">© 2026 — SCD·26 · Student-organized · UPB Cochabamba</span>
   <span>v1.0 · build:0426 · designed in mono</span>
 </div>
 

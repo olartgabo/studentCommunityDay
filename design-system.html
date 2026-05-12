@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <title>SCD · Brand Identity & Design System</title>
-  <meta name="viewport" content="width=1440" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tokens.css" />
-  <link rel="stylesheet" href="brand.css" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/brand.css" />
   <style>
     body { background: var(--ink-25); }
 
     /* Page chrome --------------------------------- */
-    .page { max-width: 1280px; margin: 0 auto; padding: 80px 56px 160px; }
+    .page { max-width: var(--page-max); margin: 0 auto; padding: 80px var(--page-pad-lg) 160px; }
 
     .topbar {
       display: flex; align-items: center; justify-content: space-between;
@@ -38,7 +38,7 @@
     }
 
     /* Section ------------------------------------- */
-    section { padding: 96px 0 24px; }
+    section { padding: var(--section-gap) 0 var(--page-pad); }
     .sec-head { display:flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; gap: 24px;}
     .sec-head h2 {
       font-family: var(--font-display); font-weight: 500;
@@ -255,6 +255,7 @@
       cursor: pointer; transition: all var(--dur-base) var(--ease-out);
       text-decoration: none;
     }
+    button.btn { appearance: none; }
     .btn-primary {
       background: var(--upb-navy-500); color: white;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 1px 0 rgba(255,255,255,0.12) inset, var(--shadow-sm);
@@ -536,6 +537,12 @@
       background-image: radial-gradient(rgba(255,255,255,0.2) 1.5px, transparent 1.5px);
       background-size: 16px 16px;
     }
+    .pat-signal {
+      background-color: var(--ink-0);
+      background-image:
+        repeating-linear-gradient(90deg, rgba(0,191,240,0.18) 0 1px, transparent 1px 18px),
+        linear-gradient(180deg, rgba(6,23,93,0.05), rgba(0,191,240,0.04));
+    }
 
     /* Motion guidelines */
     .motion-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -556,6 +563,32 @@
       font-family: var(--font-mono); font-size: 12px; color: var(--ink-500);
     }
     footer a { color: var(--cyan-600); text-decoration: none;}
+
+    @media (max-width: 980px) {
+      .page { padding: 48px 28px 96px; }
+      .topbar, .topbar .nav { flex-wrap: wrap; gap: 14px; }
+      .hero { padding: 56px 36px; }
+      .hero-grid, .logo-grid, .construction, .form-grid { grid-template-columns: 1fr; }
+      .hero h1, .display-2 { font-size: var(--fs-5xl); }
+      .display-1 { font-size: var(--fs-6xl); }
+      .palette { grid-template-columns: repeat(6, 1fr); }
+      .sem-grid, .cards-grid, .stamps-row, .motion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .spacing-grid, .icon-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .type-row, .agenda-card { grid-template-columns: 1fr; }
+      .pattern-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 28px 16px 72px; }
+      .topbar { position: static; align-items: flex-start; }
+      .topbar .nav { display: none; }
+      .hero { padding: 42px 22px; border-radius: var(--r-xl); }
+      .hero h1, .display-1, .display-2, .h1 { font-size: 44px; }
+      .hero .meta-row, .sec-head, footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .palette { grid-template-columns: repeat(2, 1fr); }
+      .sem-grid, .cards-grid, .stamps-row, .motion-grid, .spacing-grid, .icon-row { grid-template-columns: 1fr; }
+      .palette .swatch { aspect-ratio: 2.2; }
+    }
   </style>
 </head>
 <body>
@@ -1325,7 +1358,7 @@
     <div class="sec-eyebrow">09 / Patterns &amp; textures</div>
     <div class="sec-head">
       <h2>Backgrounds &amp; surface treatments</h2>
-      <span class="sec-meta">// 6 canonical textures</span>
+      <span class="sec-meta">// 7 canonical textures</span>
     </div>
     <p class="sec-lede">Pair a flat surface with one texture. Don't stack textures — that breaks the calm-tech feel. <strong>Aurora</strong> is reserved for hero sections only; <strong>blueprint</strong> can be used liberally.</p>
 
@@ -1364,6 +1397,9 @@
           </g>
         </svg>
       </div>
+    </div>
+    <div class="pattern-row" style="margin-top: 16px;">
+      <div class="pattern-tile pat-signal"><span class="tag" style="color: var(--upb-navy-500); background: rgba(255,255,255,0.76);">[07] SIGNAL LINES — dividers</span></div>
     </div>
   </section>
 
