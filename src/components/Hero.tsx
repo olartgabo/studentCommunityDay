@@ -4,6 +4,8 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 import { event } from '@/data/event';
+import { SplitChars } from './SplitChars';
+import { MagneticButton } from './MagneticButton';
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
@@ -16,11 +18,18 @@ export function Hero() {
 
       tl.from('[data-hero-eyebrow]', { y: 16, opacity: 0, duration: 0.8 })
         .from(
-          '[data-hero-word]',
-          { yPercent: 110, opacity: 0, duration: 1.05, stagger: 0.07 },
-          '-=0.4',
+          '[data-hero-line] [data-split-char]',
+          {
+            yPercent: 130,
+            rotateX: -75,
+            opacity: 0,
+            duration: 1.1,
+            stagger: { each: 0.022, from: 'start' },
+            ease: 'expo.out',
+          },
+          '-=0.5',
         )
-        .from('[data-hero-lede]', { y: 24, opacity: 0, duration: 0.8 }, '-=0.5')
+        .from('[data-hero-lede]', { y: 24, opacity: 0, duration: 0.9 }, '-=0.6')
         .from('[data-hero-meta] > *', { y: 18, opacity: 0, stagger: 0.08, duration: 0.7 }, '-=0.5')
         .from('[data-hero-actions] > *', { y: 18, opacity: 0, stagger: 0.1, duration: 0.7 }, '-=0.5')
         .from('[data-hero-terminal]', { y: 32, opacity: 0, duration: 1 }, '-=0.9')
@@ -52,7 +61,7 @@ export function Hero() {
 
       // Terminal typing
       const lines = gsap.utils.toArray<HTMLElement>('[data-term-line]');
-      const tlTerm = gsap.timeline({ delay: 1.4, repeat: -1, repeatDelay: 3 });
+      const tlTerm = gsap.timeline({ delay: 1.6, repeat: -1, repeatDelay: 3 });
       lines.forEach((line) => {
         const full = line.dataset.text ?? '';
         tlTerm.to(line, {
@@ -71,13 +80,11 @@ export function Hero() {
       id="hero"
       className="relative min-h-[100svh] overflow-hidden bg-navy-900 noise"
     >
-      {/* Background layers */}
       <div data-hero-grid className="absolute inset-0 grid-bg grid-bg-fade" />
       <div className="absolute inset-0 pointer-events-none bg-aurora animate-shimmer" />
       <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-cyan-400/20 blur-[140px] animate-drift" />
       <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-fuchsia-500/10 blur-[160px] animate-drift" />
 
-      {/* Corner labels — blueprint coords */}
       <div className="absolute top-[80px] left-6 md:left-10 corner-label">
         // 41.0 N · 17.4 S — UPB COCHA
       </div>
@@ -96,10 +103,7 @@ export function Hero() {
         className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 pt-[140px] pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center"
       >
         <div>
-          <div
-            data-hero-eyebrow
-            className="inline-flex items-center gap-3 pill-cyan mb-8"
-          >
+          <div data-hero-eyebrow className="inline-flex items-center gap-3 pill-cyan mb-8">
             <span className="relative inline-flex h-1.5 w-1.5">
               <span className="absolute inset-0 rounded-full bg-cyan-300 animate-pulse-live" />
               <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-cyan-300" />
@@ -107,19 +111,15 @@ export function Hero() {
             AWS Student Community Day · Bolivia · 2026
           </div>
 
-          <h1 className="font-display font-medium text-display-1 text-white leading-[0.9]">
-            <span className="block overflow-hidden">
-              <span data-hero-word className="inline-block">
-                Build the
-              </span>
+          <h1
+            className="font-display font-medium text-display-1 text-white leading-[0.9]"
+            style={{ perspective: '800px' }}
+          >
+            <span data-hero-line className="block overflow-hidden pb-2">
+              <SplitChars text="Build the" />
             </span>
-            <span className="block overflow-hidden">
-              <span data-hero-word className="inline-block italic-em">
-                <em className="not-italic text-cyan-300 glow-text">Cloud</em>
-              </span>{' '}
-              <span data-hero-word className="inline-block">
-                <em className="not-italic text-cyan-300 glow-text">Generation.</em>
-              </span>
+            <span data-hero-line className="block overflow-hidden pb-2">
+              <SplitChars text="Cloud Generation." accent />
             </span>
           </h1>
 
@@ -139,22 +139,25 @@ export function Hero() {
             <Metric label="DATE" value={event.dateShort} sub={event.weekday} />
             <Metric label="VENUE" value={event.venue} sub="Campus Principal" />
             <Metric label="TRACKS" value="04" sub="hands-on" />
-            <Metric label="BUILDERS" value={String(event.capacity)} sub={`${event.confirmed} confirmed`} />
+            <Metric
+              label="BUILDERS"
+              value={String(event.capacity)}
+              sub={`${event.confirmed} confirmed`}
+            />
           </div>
 
           <div data-hero-actions className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#register" className="btn-primary">
+            <MagneticButton href="#register" variant="primary">
               Register — Free
               <span aria-hidden>→</span>
-            </a>
-            <a href="#tracks" className="btn-ghost">
+            </MagneticButton>
+            <MagneticButton href="#tracks" variant="ghost" strength={0.25}>
               View tracks
               <span aria-hidden>↓</span>
-            </a>
+            </MagneticButton>
           </div>
         </div>
 
-        {/* Terminal block */}
         <div data-hero-terminal className="relative">
           <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/40 via-cyan-400/0 to-fuchsia-500/30 rounded-2xl blur-2xl opacity-50" />
           <div className="relative rounded-2xl border border-white/10 bg-navy-900/80 backdrop-blur-xl overflow-hidden shadow-glow-cyan">
@@ -172,7 +175,7 @@ export function Hero() {
               </span>
             </div>
             <div className="px-5 py-5 font-mono text-[13px] leading-[1.7] space-y-1.5">
-              <Line prompt user="builder@scd" host="cocha" cmd="register --student" />
+              <Line user="builder@scd" host="cocha" cmd="register --student" />
               <p>
                 <span data-term-line data-text="› verifying institution…" className="text-ink-300"></span>
               </p>
@@ -185,13 +188,12 @@ export function Hero() {
               <p>
                 <span data-term-line data-text="✓ welcome, builder." className="text-signal-live"></span>
               </p>
-              <Line prompt user="builder@scd" host="cocha" cmd="open --schedule" trailing />
+              <Line user="builder@scd" host="cocha" cmd="open --schedule" trailing />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll cue */}
       <a
         data-hero-cue
         href="#manifesto"
@@ -220,7 +222,6 @@ function Line({
   cmd,
   trailing,
 }: {
-  prompt?: boolean;
   user: string;
   host: string;
   cmd: string;

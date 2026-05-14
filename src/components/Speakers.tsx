@@ -18,6 +18,7 @@ export function Speakers() {
 
   useGSAP(
     () => {
+      // Card lifts up
       gsap.from('[data-speaker]', {
         y: 80,
         opacity: 0,
@@ -27,6 +28,36 @@ export function Speakers() {
         scrollTrigger: {
           trigger: '[data-speakers-grid]',
           start: 'top 80%',
+        },
+      });
+
+      // Image clips in diagonally a beat behind the card lift — feels like
+      // the portrait is wiped onto the card with a knife.
+      gsap.fromTo(
+        '[data-speaker-img]',
+        { clipPath: 'polygon(0% 100%, 0% 100%, 35% 100%, 0% 60%)' },
+        {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          duration: 1.3,
+          stagger: 0.12,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: '[data-speakers-grid]',
+            start: 'top 78%',
+          },
+        },
+      );
+
+      // Initials slide in once the clip-path settles.
+      gsap.from('[data-speaker-initials]', {
+        yPercent: 60,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.12,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: '[data-speakers-grid]',
+          start: 'top 75%',
         },
       });
     },
@@ -42,7 +73,11 @@ export function Speakers() {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
       <div className="absolute inset-0 grid-bg opacity-25" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 md:px-10">
+      <div
+        data-scroll-skew
+        className="relative max-w-[1400px] mx-auto px-6 md:px-10 will-change-transform"
+        style={{ transformOrigin: '50% 50%' }}
+      >
         <header className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16">
           <div>
             <div className="mono-label mb-4">// 04 — Speakers</div>
@@ -61,9 +96,14 @@ export function Speakers() {
             <article
               key={s.id}
               data-speaker
+              data-cursor="open"
               className="group relative rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500 hover:border-cyan-400/40 hover:-translate-y-1"
             >
-              <div className="aspect-[4/5] relative overflow-hidden">
+              <div
+                data-speaker-img
+                className="aspect-[4/5] relative overflow-hidden will-change-[clip-path]"
+                style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+              >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${trackTint[s.track]} transition-transform duration-700 group-hover:scale-110`}
                 />
@@ -74,8 +114,11 @@ export function Speakers() {
                       'repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px)',
                   }}
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display font-medium text-[clamp(64px,8vw,120px)] text-white/85 tracking-tightest leading-none">
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                  <span
+                    data-speaker-initials
+                    className="font-display font-medium text-[clamp(64px,8vw,120px)] text-white/85 tracking-tightest leading-none inline-block"
+                  >
                     {s.initials}
                   </span>
                 </div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { LockupHorizontal } from './Logo';
+import { MagneticButton } from './MagneticButton';
+import { CountdownPill } from './Countdown';
 import { event, navLinks } from '@/data/event';
 
 export function Nav() {
@@ -69,6 +71,7 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <CountdownPill />
           <div className="hidden md:flex items-center gap-2 pill">
             <span className="relative inline-flex h-1.5 w-1.5">
               <span className="absolute inset-0 rounded-full bg-signal-live animate-pulse-live" />
@@ -76,10 +79,10 @@ export function Nav() {
             </span>
             <span>{event.city} · LIVE</span>
           </div>
-          <a href="#register" className="btn-primary text-[11px] py-2.5 px-4">
+          <MagneticButton href="#register" variant="primary" strength={0.4} className="text-[11px] py-2.5 px-4">
             Register
             <span aria-hidden>→</span>
-          </a>
+          </MagneticButton>
         </div>
       </div>
     </header>

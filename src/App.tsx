@@ -8,10 +8,11 @@ import { Speakers } from './components/Speakers';
 import { Register } from './components/Register';
 import { Footer } from './components/Footer';
 import { ScrollProgress, CursorGlow } from './components/ScrollProgress';
-import { useSmoothScroll } from './lib/smoothScroll';
+import { useSmoothScroll, useScrollSkew } from './lib/smoothScroll';
 
 export default function App() {
   useSmoothScroll();
+  useScrollSkew();
 
   return (
     <>

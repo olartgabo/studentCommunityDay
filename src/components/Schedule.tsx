@@ -53,7 +53,11 @@ export function Schedule() {
     >
       <div className="absolute inset-0 dot-field opacity-30" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 md:px-10">
+      <div
+        data-scroll-skew
+        className="relative max-w-[1400px] mx-auto px-6 md:px-10 will-change-transform"
+        style={{ transformOrigin: '50% 50%' }}
+      >
         <header className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-16">
           <div>
             <div className="mono-label mb-4">// 03 — Schedule</div>

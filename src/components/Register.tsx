@@ -3,11 +3,13 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { event } from '@/data/event';
+import { useMagnetic } from '@/lib/useMagnetic';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Register() {
   const root = useRef<HTMLElement | null>(null);
+  const submitRef = useMagnetic<HTMLButtonElement>(0.35);
 
   useGSAP(
     () => {
@@ -38,7 +40,11 @@ export function Register() {
       <div className="absolute inset-0 grid-bg grid-bg-fade opacity-50" />
       <div className="absolute -top-20 right-1/3 w-[500px] h-[500px] rounded-full bg-cyan-400/15 blur-[140px] animate-drift" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 md:px-10">
+      <div
+        data-scroll-skew
+        className="relative max-w-[1400px] mx-auto px-6 md:px-10 will-change-transform"
+        style={{ transformOrigin: '50% 50%' }}
+      >
         <div className="text-center mb-16">
           <div className="mono-label mb-6">// 05 — Register</div>
           <h2 className="font-display font-medium text-[clamp(56px,11vw,180px)] tracking-tightest text-white leading-[0.9]">
@@ -95,9 +101,16 @@ export function Register() {
               <p className="font-mono text-[11px] text-white/40 max-w-[36ch]">
                 Recibirás tu wristband digital + acceso al Discord en 24h.
               </p>
-              <button type="submit" className="btn-primary">
-                Register — Free
-                <span aria-hidden>→</span>
+              <button
+                ref={submitRef}
+                type="submit"
+                data-cursor="send"
+                className="btn-primary will-change-transform"
+              >
+                <span className="pointer-events-none inline-flex items-center gap-3">
+                  Register — Free
+                  <span aria-hidden>→</span>
+                </span>
               </button>
             </div>
           </form>

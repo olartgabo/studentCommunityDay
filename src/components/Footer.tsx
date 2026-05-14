@@ -1,5 +1,6 @@
 import { event, navLinks } from '@/data/event';
 import { Logo } from './Logo';
+import { CountdownBlock } from './Countdown';
 
 export function Footer() {
   return (
@@ -7,6 +8,10 @@ export function Footer() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
 
       <div className="relative max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="mb-12 max-w-md">
+          <CountdownBlock />
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 pb-16">
           <div>
             <div className="flex items-center gap-3 mb-6">

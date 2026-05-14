@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,19 +11,48 @@ export function Manifesto() {
 
   useGSAP(
     () => {
-      gsap.from('[data-manifesto-line]', {
-        opacity: 0.08,
+      const wrap = root.current;
+      if (!wrap) return;
+
+      const words = gsap.utils.toArray<HTMLElement>('[data-manifesto-word]', wrap);
+      const finale = wrap.querySelector<HTMLElement>('[data-manifesto-finale]');
+
+      gsap.set(words, { color: 'rgba(255,255,255,0.18)' });
+
+      // Pin + scrub: words light up one-by-one as the section moves through.
+      const tl = gsap.timeline({
+        defaults: { ease: 'none' },
         scrollTrigger: {
-          trigger: root.current,
-          start: 'top 70%',
-          end: 'bottom 50%',
-          scrub: true,
+          trigger: wrap,
+          start: 'top top',
+          end: () => `+=${Math.max(900, words.length * 90)}`,
+          scrub: 0.35,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
         },
-        stagger: { each: 0.2, from: 'start' },
-        duration: 1.2,
-        ease: 'none',
       });
 
+      tl.to(words, {
+        color: 'rgba(255,255,255,1)',
+        duration: 1,
+        stagger: { each: 1, from: 'start' },
+      });
+
+      if (finale) {
+        tl.to(
+          finale,
+          {
+            color: '#38d6ff',
+            textShadow:
+              '0 0 24px rgba(0,191,240,0.55), 0 0 80px rgba(0,191,240,0.25)',
+            duration: 1.4,
+          },
+          '>-0.6',
+        );
+      }
+
+      // Counters in the sidebar still animate on first entry.
       gsap.utils.toArray<HTMLElement>('[data-counter]').forEach((el) => {
         const target = Number(el.dataset.counter);
         const obj = { v: 0 };
@@ -37,7 +66,9 @@ export function Manifesto() {
               duration: 1.6,
               ease: 'power3.out',
               onUpdate: () => {
-                el.textContent = Math.floor(obj.v).toString().padStart(el.dataset.pad ? Number(el.dataset.pad) : 0, '0');
+                el.textContent = Math.floor(obj.v)
+                  .toString()
+                  .padStart(el.dataset.pad ? Number(el.dataset.pad) : 0, '0');
               },
             });
           },
@@ -47,16 +78,18 @@ export function Manifesto() {
     { scope: root },
   );
 
+  const lineCount = manifestoLines.length;
+
   return (
     <section
       ref={root}
       id="manifesto"
-      className="relative py-32 md:py-44 bg-navy-900 overflow-hidden"
+      className="relative min-h-[100svh] flex items-center py-32 md:py-44 bg-navy-900 overflow-hidden"
     >
       <div className="absolute inset-0 dot-field opacity-50" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
 
-      <div className="relative max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-[1fr_2fr] gap-16">
+      <div className="relative w-full max-w-[1400px] mx-auto px-6 md:px-10 grid lg:grid-cols-[1fr_2fr] gap-16">
         <aside className="space-y-8">
           <div className="mono-label">// 01 — Manifesto</div>
 
@@ -76,19 +109,30 @@ export function Manifesto() {
         </aside>
 
         <div className="relative">
-          <h2 className="font-display font-medium text-display-2 text-white/30 leading-[1.05]">
-            {manifestoLines.map((line, i) => (
-              <span key={i} data-manifesto-line className="block">
-                {i === manifestoLines.length - 1 ? (
-                  <>
-                    {line.replace('nube.', '')}
-                    <em className="not-italic text-cyan-300 glow-text">nube.</em>
-                  </>
-                ) : (
-                  line
-                )}
-              </span>
-            ))}
+          <h2 className="font-display font-medium text-display-2 leading-[1.05]">
+            {manifestoLines.map((line, lineIdx) => {
+              const tokens = line.split(/(\s+)/);
+              const isLastLine = lineIdx === lineCount - 1;
+              return (
+                <span key={lineIdx} className="block">
+                  {tokens.map((tok, j) => {
+                    if (/^\s+$/.test(tok)) return <Fragment key={j}>{tok}</Fragment>;
+                    const isFinale = isLastLine && tok.includes('nube');
+                    return (
+                      <span
+                        key={j}
+                        data-manifesto-word
+                        {...(isFinale ? { 'data-manifesto-finale': true } : {})}
+                        className="inline-block"
+                        style={{ color: 'rgba(255,255,255,0.18)' }}
+                      >
+                        {tok}
+                      </span>
+                    );
+                  })}
+                </span>
+              );
+            })}
           </h2>
 
           <p className="mt-12 max-w-[58ch] text-ink-200 text-[17px] leading-[1.7]">
