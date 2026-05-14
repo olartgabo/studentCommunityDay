@@ -1,30 +1,56 @@
-# Student Community Day
+# Student Community Day · 2026
 
-Static brand and landing preview for AWS Student Community Day at UPB Cochabamba.
+High-end, animated landing for **AWS Student Community Day** at UPB Cochabamba.
 
-## Project Structure
+**Stack** — React 18 · TypeScript · Vite · Tailwind CSS · GSAP (+ ScrollTrigger, TextPlugin) · Lenis smooth scroll.
+
+## Run
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production bundle to dist/
+npm run preview  # serve dist/
+```
+
+## Project structure
 
 ```text
 .
-├── index.html              # Entry hub
-├── landing.html            # Applied event landing page
-├── design-system.html      # Brand system reference
-├── styles/
-│   ├── tokens.css          # Global design variables
-│   └── brand.css           # Shared utilities and brand patterns
-├── scripts/
-│   ├── config.js           # Public event configuration
-│   └── apply-config.js     # Applies configuration to static HTML
-├── docs/
-│   └── design-system.md    # Short system notes
-└── design-canvas.jsx       # Design canvas helper
+├── index.html              # Vite entry
+├── tailwind.config.js      # brand tokens → tailwind theme
+├── postcss.config.js
+├── vite.config.ts
+├── tsconfig.json
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── main.tsx            # React root
+│   ├── App.tsx             # composes sections + smooth scroll
+│   ├── styles/globals.css  # tailwind layers + component utilities
+│   ├── lib/
+│   │   └── smoothScroll.tsx  # Lenis + GSAP ticker bridge
+│   ├── data/
+│   │   └── event.ts        # tracks, schedule, speakers, sponsors, copy
+│   └── components/
+│       ├── Nav.tsx
+│       ├── Hero.tsx
+│       ├── Marquee.tsx
+│       ├── Manifesto.tsx
+│       ├── Tracks.tsx
+│       ├── Schedule.tsx
+│       ├── Speakers.tsx
+│       ├── Register.tsx
+│       ├── Footer.tsx
+│       ├── Logo.tsx
+│       └── ScrollProgress.tsx  # scroll bar + cursor glow
+└── legacy/                 # original static HTML system (reference)
 ```
 
-## Editing Notes
+## Editing notes
 
-- Change shared colors, spacing, radii, and layout values in `styles/tokens.css`.
-- Add reusable visual helpers in `styles/brand.css`.
-- Change event data in `scripts/config.js`.
-- Keep page-specific layout in each HTML file.
-- Do not put secrets in frontend config files.
-- Open `index.html` in a browser to navigate the project.
+- Brand tokens (navy / cyan / ink scales, fonts) live in `tailwind.config.js`.
+- Reusable utility classes (`mono-label`, `pill`, `btn-primary`, `grid-bg`, `corner-label`, etc.) live in `src/styles/globals.css`.
+- Event content (tracks, schedule, speakers, sponsors, marquee phrases) is centralized in `src/data/event.ts`.
+- The original design system + landing are preserved under `legacy/` for reference.
+- `prefers-reduced-motion` disables animations and Lenis smooth wheel.
