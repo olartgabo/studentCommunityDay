@@ -45,11 +45,13 @@ export function Nav() {
             <a
               key={link.id}
               href={`#${link.id}`}
-              className="group flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors"
+              className="group flex items-center gap-1.5 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors"
             >
               <span
-                className={`transition-colors ${
-                  active === link.id ? 'text-cyan-300' : 'text-white/30'
+                className={`transition-all duration-200 ${
+                  active === link.id
+                    ? 'text-cyan-300/60 opacity-100'
+                    : 'text-white/30 opacity-0 group-hover:opacity-100'
                 }`}
               >
                 {link.num}
@@ -57,14 +59,14 @@ export function Nav() {
               <span
                 className={`transition-colors ${
                   active === link.id
-                    ? 'text-white'
-                    : 'text-white/60 group-hover:text-white'
+                    ? 'text-white/90'
+                    : 'text-white/50 group-hover:text-white/90'
                 }`}
               >
                 {link.label}
               </span>
               {active === link.id && (
-                <span className="ml-1 h-px w-4 bg-cyan-300" aria-hidden />
+                <span className="ml-0.5 h-px w-3 bg-cyan-300/60" aria-hidden />
               )}
             </a>
           ))}

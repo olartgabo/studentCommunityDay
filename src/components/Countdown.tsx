@@ -50,11 +50,11 @@ export function CountdownPill() {
   }
 
   return (
-    <div className="hidden xl:flex items-center gap-2 pill">
-      <span className="font-mono text-[10px] text-white/40">T−</span>
+    <div className="hidden xl:flex items-center pill whitespace-nowrap">
       <span className="font-mono text-[11px] tabular-nums text-cyan-200">
-        {pad(days, 3)}d{' '}
-        <span className="text-white/40">·</span> {pad(hours)}h
+        T−{pad(days, 3)}d
+        <span className="text-white/30 mx-1.5">·</span>
+        {pad(hours)}h
       </span>
     </div>
   );

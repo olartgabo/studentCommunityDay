@@ -39,6 +39,7 @@ export function useSmoothScroll() {
     lenisInstance = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
+    const refreshId = setTimeout(() => ScrollTrigger.refresh(), 120);
 
     const raf = (time: number) => {
       lenis.raf(time * 1000);
@@ -66,6 +67,7 @@ export function useSmoothScroll() {
     document.addEventListener('click', onAnchorClick);
 
     return () => {
+      clearTimeout(refreshId);
       document.removeEventListener('click', onAnchorClick);
       gsap.ticker.remove(raf);
       lenis.destroy();

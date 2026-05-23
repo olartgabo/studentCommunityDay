@@ -46,14 +46,14 @@ export function Register() {
         style={{ transformOrigin: '50% 50%' }}
       >
         <div className="text-center mb-16">
-          <div className="mono-label mb-6">// 05 — Register</div>
+          <div className="mono-label mb-6">// 06 — Register</div>
           <h2 className="font-display font-medium text-[clamp(56px,11vw,180px)] tracking-tightest text-white leading-[0.9]">
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden pb-[0.12em]">
               <span data-cta-word className="inline-block">
                 Get your
               </span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden pb-[0.12em]">
               <span data-cta-word className="inline-block">
                 <em className="not-italic text-cyan-300 glow-text">wristband.</em>
               </span>

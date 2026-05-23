@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { speakers, sponsors } from '@/data/event';
+import { speakers } from '@/data/event';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,12 +27,11 @@ export function Speakers() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '[data-speakers-grid]',
-          start: 'top 80%',
+          start: 'top 95%',
+          once: true,
         },
       });
 
-      // Image clips in diagonally a beat behind the card lift — feels like
-      // the portrait is wiped onto the card with a knife.
       gsap.fromTo(
         '[data-speaker-img]',
         { clipPath: 'polygon(0% 100%, 0% 100%, 35% 100%, 0% 60%)' },
@@ -43,12 +42,12 @@ export function Speakers() {
           ease: 'expo.out',
           scrollTrigger: {
             trigger: '[data-speakers-grid]',
-            start: 'top 78%',
+            start: 'top 95%',
+            once: true,
           },
         },
       );
 
-      // Initials slide in once the clip-path settles.
       gsap.from('[data-speaker-initials]', {
         yPercent: 60,
         opacity: 0,
@@ -57,7 +56,8 @@ export function Speakers() {
         ease: 'power4.out',
         scrollTrigger: {
           trigger: '[data-speakers-grid]',
-          start: 'top 75%',
+          start: 'top 92%',
+          once: true,
         },
       });
     },
@@ -143,30 +143,36 @@ export function Speakers() {
           ))}
         </div>
 
-        {/* Sponsors strip */}
-        <div className="mt-24 pt-12 border-t border-white/5">
-          <div className="flex items-center justify-between mb-8">
-            <div className="mono-label">// Sponsors & partners</div>
-            <span className="font-mono text-[11px] text-white/30">
-              Powered by community
-            </span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {sponsors.map((sp) => (
-              <div
-                key={sp.name}
-                className={`h-20 rounded-xl border flex items-center justify-center font-display font-medium text-sm tracking-tight transition-colors ${
-                  sp.tier === 'host'
-                    ? 'border-cyan-400/50 bg-cyan-400/10 text-cyan-100'
-                    : 'border-white/10 bg-white/[0.02] text-white/70 hover:border-cyan-400/30 hover:text-white'
-                }`}
-              >
-                {sp.name}
-              </div>
-            ))}
-          </div>
-        </div>
+        <CallForSpeakers />
       </div>
     </section>
+  );
+}
+
+function CallForSpeakers() {
+  return (
+    <a
+      href="mailto:hi@scd-bolivia.dev?subject=Talk%20Submission%20SCD%C2%B726"
+      data-cursor="go"
+      className="group relative mt-12 flex items-center justify-between gap-8 w-full px-8 md:px-14 py-10 md:py-12 rounded-2xl border border-dashed border-white/20 bg-white/[0.01] hover:border-cyan-400/50 hover:bg-cyan-400/[0.03] transition-all duration-500 overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/0 to-cyan-400/0 group-hover:from-cyan-400/5 group-hover:via-cyan-400/3 group-hover:to-transparent transition-all duration-700" />
+
+      <div className="relative">
+        <div className="mono-label mb-3 text-white/30">// Open call</div>
+        <div className="overflow-hidden">
+          <p className="font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest transition-transform duration-400 ease-in-out group-hover:-translate-y-full text-white">
+            Call for speakers<span className="text-white/30 ml-3">→</span>
+          </p>
+          <p className="absolute bottom-0 left-0 font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-in-out text-cyan-300">
+            I want to give a talk<span className="ml-3">↗</span>
+          </p>
+        </div>
+      </div>
+
+      <div className="relative shrink-0 h-16 w-16 md:h-20 md:w-20 rounded-full border border-white/15 group-hover:border-cyan-400/60 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
+        <span className="font-mono text-[22px] text-white/30 group-hover:text-cyan-300 transition-colors duration-300">↗</span>
+      </div>
+    </a>
   );
 }

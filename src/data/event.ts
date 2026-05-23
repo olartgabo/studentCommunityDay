@@ -6,10 +6,10 @@ export const event = {
   country: 'Bolivia',
   venue: 'UPB Cochabamba',
   year: '2026',
-  dateISO: '2026-10-17',
-  dateDisplay: '17.10.2026',
-  dateShort: '17 · OCT',
-  dateLong: '17 · OCTUBRE · 2026',
+  dateISO: '2026-10-03',
+  dateDisplay: '03.10.2026',
+  dateShort: '03 · OCT',
+  dateLong: '03 · OCTUBRE · 2026',
   weekday: 'Sábado',
   capacity: 500,
   confirmed: 312,
@@ -20,12 +20,13 @@ export const event = {
 };
 
 export const navLinks = [
-  { id: 'hero', num: '00', label: 'Index' },
+  { id: 'hero',      num: '00', label: 'Index' },
   { id: 'manifesto', num: '01', label: 'Manifesto' },
-  { id: 'tracks', num: '02', label: 'Tracks' },
-  { id: 'schedule', num: '03', label: 'Schedule' },
-  { id: 'speakers', num: '04', label: 'Speakers' },
-  { id: 'register', num: '05', label: 'Register' },
+  { id: 'tracks',    num: '02', label: 'Tracks' },
+  { id: 'schedule',  num: '03', label: 'Schedule' },
+  { id: 'speakers',  num: '04', label: 'Speakers' },
+  { id: 'sponsors',  num: '05', label: 'Sponsors' },
+  { id: 'register',  num: '06', label: 'Register' },
 ];
 
 export const tracks = [
@@ -116,14 +117,66 @@ export const schedule = [
   { time: '18:00', length: '60 MIN', title: 'Closing + swag drop', venue: 'AUDITORIO', track: 'open' },
 ];
 
-export const sponsors = [
-  { name: 'UPB Cochabamba', tier: 'host' },
-  { name: 'AWS Community', tier: 'platinum' },
-  { name: 'Llama Labs', tier: 'gold' },
-  { name: 'Tech Partner', tier: 'gold' },
-  { name: 'Local Builder Co.', tier: 'silver' },
-  { name: 'OSS Friends', tier: 'silver' },
-];
+export const sponsors: { name: string; tier: string }[] = [];
+
+export const sponsorTiers = [
+  {
+    id: 'host',
+    name: 'Host',
+    tagline: 'Eres el evento',
+    featured: true,
+    accent: 'cyan',
+    benefits: [
+      'Nombre co-branding en el título del evento',
+      'Keynote slot — 20 min on stage',
+      'Logo principal en todos los materiales impresos y digitales',
+      'Stand premium en patio de networking',
+      'Mención en todos los posts y comunicados oficiales',
+      '20 pases de acceso completo',
+      'Acceso al directorio de asistentes (opt-in)',
+    ],
+  },
+  {
+    id: 'platinum',
+    name: 'Platinum',
+    tagline: 'Máxima visibilidad',
+    featured: false,
+    accent: 'white',
+    benefits: [
+      'Logo en stage y materiales impresos',
+      'Lightning talk — 10 min on stage',
+      'Demo table en zona de networking',
+      'Mención destacada en redes sociales',
+      '10 pases de acceso completo',
+    ],
+  },
+  {
+    id: 'gold',
+    name: 'Gold',
+    tagline: 'Presencia activa',
+    featured: false,
+    accent: 'amber',
+    benefits: [
+      'Logo en website y materiales del evento',
+      'Mesa en zona de networking',
+      'Post dedicado en redes sociales',
+      '5 pases de acceso completo',
+      'Swag inclusion — stickers / inserts',
+    ],
+  },
+  {
+    id: 'silver',
+    name: 'Silver',
+    tagline: 'Apoya la comunidad',
+    featured: false,
+    accent: 'neutral',
+    benefits: [
+      'Logo en website del evento',
+      'Mención en redes sociales',
+      '2 pases de acceso completo',
+    ],
+  },
+] as const;
 
 export const marqueeWords = [
   'BUILD · BREAK · DEPLOY',
@@ -141,4 +194,39 @@ export const manifestoLines = [
   'Es un día para construir,',
   'romper, y desplegar —',
   'del aula a la nube.',
+];
+
+export const venueDetails = {
+  fullName: 'Universidad Privada Boliviana — Campus Cochabamba',
+  address: 'Av. Capitán Víctor Ustariz, Cochabamba, Bolivia',
+  mapsUrl: 'https://maps.google.com/?q=UPB+Cochabamba+Av+Capitan+Victor+Ustariz',
+  lat: '-17.393',
+  lng: '-66.157',
+};
+
+export const faqs = [
+  {
+    q: '¿Es gratis?',
+    a: 'Sí. Entrada completamente gratuita para estudiantes. Trae tu ID universitaria el día del evento.',
+  },
+  {
+    q: '¿Quién puede asistir?',
+    a: 'Cualquier estudiante universitario, de cualquier carrera y universidad. No hace falta ser de sistemas o ingeniería.',
+  },
+  {
+    q: '¿Qué debo traer?',
+    a: 'Laptop con batería cargada, ID universitaria y curiosidad. Todo el software necesario se instala durante el workshop.',
+  },
+  {
+    q: '¿Necesito saber AWS?',
+    a: 'No. El track /cloud empieza desde cero. Cada track tiene su propio nivel de entrada — elige el que más se adapte a ti.',
+  },
+  {
+    q: '¿Habrá materiales después del evento?',
+    a: 'Sí. Todos los labs, repos y slides quedan disponibles en nuestro GitHub público tras el evento.',
+  },
+  {
+    q: '¿Hay certificados?',
+    a: 'Badge digital de asistencia + acceso a créditos AWS educativos para todos los participantes activos.',
+  },
 ];

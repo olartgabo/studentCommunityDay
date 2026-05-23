@@ -1,49 +1,20 @@
+import awsLogo from '@/assets/aws-logo.svg';
+
 interface LogoProps {
   size?: number;
   className?: string;
-  animated?: boolean;
 }
 
-export function Logo({ size = 48, className = '', animated = false }: LogoProps) {
+export function Logo({ size = 48, className = '' }: LogoProps) {
   return (
-    <svg
+    <img
+      src={awsLogo}
       width={size}
       height={size}
-      viewBox="0 0 64 64"
-      fill="none"
       className={className}
-      aria-label="SCD·26 mark"
-    >
-      <rect
-        x="6"
-        y="14"
-        width="32"
-        height="32"
-        rx="9"
-        fill="#06175D"
-        className={animated ? 'origin-center' : ''}
-      />
-      <rect
-        x="22"
-        y="22"
-        width="32"
-        height="32"
-        rx="9"
-        fill="#00BFF0"
-        className={animated ? 'origin-center' : ''}
-      />
-      <rect
-        x="14"
-        y="18"
-        width="32"
-        height="32"
-        rx="9"
-        fill="none"
-        stroke="white"
-        strokeWidth="2.5"
-        className={animated ? 'origin-center' : ''}
-      />
-    </svg>
+      alt="AWS Student Builder Group UPB"
+      style={{ objectFit: 'contain' }}
+    />
   );
 }
 
