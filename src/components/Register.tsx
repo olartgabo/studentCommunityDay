@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { event } from '@/data/event';
 import { useMagnetic } from '@/lib/useMagnetic';
+import { Logo } from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ export function Register() {
       <div className="absolute inset-0 bg-aurora opacity-80 animate-shimmer" />
       <div className="absolute inset-0 grid-bg grid-bg-fade opacity-50" />
       <div className="absolute -top-20 right-1/3 w-[500px] h-[500px] rounded-full bg-cyan-400/15 blur-[140px] animate-drift" />
+      <Logo size={380} aria-hidden className="absolute -bottom-20 -right-20 opacity-[0.03] pointer-events-none select-none" />
 
       <div
         data-scroll-skew
@@ -98,9 +100,12 @@ export function Register() {
             </div>
 
             <div className="mt-10 flex items-center justify-between gap-4 flex-wrap">
-              <p className="font-mono text-[11px] text-white/40 max-w-[36ch]">
-                Recibirás tu wristband digital + acceso al Discord en 24h.
-              </p>
+              <div className="flex items-center gap-3">
+                <Logo size={22} className="opacity-60" />
+                <p className="font-mono text-[11px] text-white/40 max-w-[36ch]">
+                  Recibirás tu wristband digital + acceso al Discord en 24h.
+                </p>
+              </div>
               <button
                 ref={submitRef}
                 type="submit"

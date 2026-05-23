@@ -14,10 +14,15 @@ export function Footer() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 pb-16">
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <Logo size={44} />
-              <div className="font-display font-semibold text-xl text-white leading-tight">
-                SCD<span className="text-cyan-300">·</span>26
+            <div className="flex items-center gap-4 mb-6">
+              <Logo size={52} />
+              <div>
+                <div className="font-display font-semibold text-xl text-white leading-tight">
+                  SCD<span className="text-cyan-300">·</span>26
+                </div>
+                <div className="font-mono text-[9px] tracking-[0.16em] uppercase text-white/30 mt-0.5">
+                  AWS Student Builder Group · UPB
+                </div>
               </div>
             </div>
             <p className="text-ink-300 text-sm leading-[1.7] max-w-[36ch]">
@@ -58,7 +63,7 @@ export function Footer() {
           <div>© 2026 SCD Bolivia · Community-run · Non-profit</div>
           <div className="flex items-center gap-6">
             <span>Build · Break · Deploy</span>
-            <span className="text-cyan-300/80">v2026.10.17</span>
+            <span className="text-cyan-300/80">v2026.10.03</span>
           </div>
         </div>
       </div>

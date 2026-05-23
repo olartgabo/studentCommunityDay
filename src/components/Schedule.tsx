@@ -62,7 +62,7 @@ export function Schedule() {
           <div>
             <div className="mono-label mb-4">// 03 — Schedule</div>
             <h2 className="font-display font-medium text-[clamp(40px,5vw,72px)] tracking-tightest text-white leading-[0.95]">
-              Sábado <em className="not-italic text-cyan-300">17.10</em>
+              Sábado <em className="not-italic text-cyan-300">03.10</em>
               <br />
               09 → 18.
             </h2>

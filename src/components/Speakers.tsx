@@ -18,48 +18,20 @@ export function Speakers() {
 
   useGSAP(
     () => {
-      // Card lifts up
-      gsap.from('[data-speaker]', {
-        y: 80,
+      const tl = gsap.timeline({ delay: 0.15 });
+
+      tl.from('[data-speaker]', {
+        y: 60,
         opacity: 0,
-        duration: 1,
-        stagger: 0.12,
+        duration: 0.85,
+        stagger: 0.1,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '[data-speakers-grid]',
-          start: 'top 95%',
-          once: true,
-        },
-      });
-
-      gsap.fromTo(
-        '[data-speaker-img]',
-        { clipPath: 'polygon(0% 100%, 0% 100%, 35% 100%, 0% 60%)' },
-        {
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-          duration: 1.3,
-          stagger: 0.12,
-          ease: 'expo.out',
-          scrollTrigger: {
-            trigger: '[data-speakers-grid]',
-            start: 'top 95%',
-            once: true,
-          },
-        },
-      );
-
-      gsap.from('[data-speaker-initials]', {
-        yPercent: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: 'power4.out',
-        scrollTrigger: {
-          trigger: '[data-speakers-grid]',
-          start: 'top 92%',
-          once: true,
-        },
-      });
+      })
+        .from(
+          '[data-speaker-initials]',
+          { yPercent: 50, opacity: 0, duration: 0.9, stagger: 0.1, ease: 'power4.out' },
+          '-=0.6',
+        );
     },
     { scope: root },
   );
@@ -160,11 +132,11 @@ function CallForSpeakers() {
 
       <div className="relative">
         <div className="mono-label mb-3 text-white/30">// Open call</div>
-        <div className="overflow-hidden">
-          <p className="font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest transition-transform duration-400 ease-in-out group-hover:-translate-y-full text-white">
+        <div className="relative overflow-hidden" style={{ height: 'clamp(24px, 4vw, 52px)' }}>
+          <p className="font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest transition-transform duration-[400ms] ease-in-out group-hover:-translate-y-full text-white whitespace-nowrap">
             Call for speakers<span className="text-white/30 ml-3">→</span>
           </p>
-          <p className="absolute bottom-0 left-0 font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-in-out text-cyan-300">
+          <p className="absolute inset-0 font-display font-medium text-[clamp(24px,4vw,52px)] leading-none tracking-tightest translate-y-full group-hover:translate-y-0 transition-transform duration-[400ms] ease-in-out text-cyan-300 whitespace-nowrap">
             I want to give a talk<span className="ml-3">↗</span>
           </p>
         </div>

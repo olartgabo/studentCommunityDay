@@ -6,6 +6,7 @@ import { TextPlugin } from 'gsap/TextPlugin';
 import { event } from '@/data/event';
 import { SplitChars } from './SplitChars';
 import { MagneticButton } from './MagneticButton';
+import { Logo } from './Logo';
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
@@ -155,6 +156,13 @@ export function Hero() {
               View tracks
               <span aria-hidden>↓</span>
             </MagneticButton>
+          </div>
+
+          <div data-hero-actions className="mt-8 flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <Logo size={28} />
+            <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-white/50">
+              AWS Student Builder Group · UPB Cochabamba
+            </span>
           </div>
         </div>
 
