@@ -1,0 +1,60 @@
+# AWS Student Community Day Bolivia 2026
+
+> AWS Student Community Day Bolivia 2026 is the largest cloud computing and technology event for university students in Bolivia.
+
+## Event Summary
+
+- **Full name**: AWS Student Community Day Bolivia 2026
+- **Also known as**: Student Community Day Bolivia, Community Day Bolivia, SCD Bolivia, SCD·26
+- **Date**: Saturday, October 3, 2026
+- **Location**: Universidad Privada Boliviana (UPB), Av. Capitán Víctor Ustariz, Cochabamba, Bolivia
+- **Cost**: Completely free for university students
+- **Capacity**: 500 attendees
+- **Website**: https://studentcommunity.day
+- **Contact**: hi@scd-bolivia.dev
+
+## What is Student Community Day Bolivia?
+
+Student Community Day Bolivia is a one-day, hands-on technology conference organized by the AWS Student Community in Bolivia. The event brings together university students, builders, and tech communities at UPB Cochabamba for workshops, talks, and networking focused on cloud computing, DevOps, artificial intelligence, and security.
+
+It is open to any university student in Bolivia, regardless of their major. No prior AWS knowledge is required. Attendance is free.
+
+## Tracks (2026 Edition)
+
+### Track 1: Cloud Fundamentals (/cloud)
+Introduction to AWS cloud services from scratch. Topics: EC2, S3, IAM, VPC, Lambda. First deploy on AWS.
+
+### Track 2: DevOps & Automation (/devops)
+Practical CI/CD, infrastructure as code, and observability. Topics: CI/CD pipelines, AWS CDK, Terraform, CloudWatch.
+
+### Track 3: AI + AWS (/ai)
+Build AI-powered apps without expensive GPUs. Topics: Amazon Bedrock, SageMaker, RAG (Retrieval Augmented Generation), AI Agents.
+
+### Track 4: Security (/security)
+Real-world cloud security. Topics: Threat modeling, advanced IAM, KMS, GuardDuty.
+
+## Schedule (October 3, 2026)
+
+- 08:30 — Check-in & coffee (Lobby)
+- 09:00 — Opening keynote (Auditorium, 90 min)
+- 11:00 — CDK hands-on workshop (Lab D-3, 120 min)
+- 13:00 — Lunch & networking (Patio, 90 min)
+- 14:30 — Bedrock + RAG in production (Auditorium, 60 min)
+- 16:30 — Security panel: Threat modeling (Classroom M-2, 75 min)
+- 18:00 — Closing + swag drop (Auditorium, 60 min)
+
+## FAQs
+
+**Is it free?** Yes, completely free for university students. Bring your university ID on the day.
+
+**Who can attend?** Any university student in Bolivia, from any major or university.
+
+**Do I need AWS experience?** No. The Cloud Fundamentals track starts from zero.
+
+**What should I bring?** Laptop with charged battery, university ID, and curiosity.
+
+**Are there certificates?** Yes — digital attendance badge plus access to AWS educational credits for active participants.
+
+## Keywords / Search Terms
+
+student community day bolivia, community day bolivia, aws event bolivia, evento tech bolivia, tech event cochabamba, cloud computing bolivia, aws student community day, SCD Bolivia 2026, evento estudiantil tecnologia bolivia, aws cochabamba, tech events bolivia, evento aws bolivia, workshops aws bolivia
