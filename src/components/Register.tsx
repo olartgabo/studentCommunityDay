@@ -3,14 +3,12 @@ import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { event } from '@/data/event';
-import { useMagnetic } from '@/lib/useMagnetic';
 import { Logo } from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Register() {
   const root = useRef<HTMLElement | null>(null);
-  const submitRef = useMagnetic<HTMLButtonElement>(0.35);
 
   useGSAP(
     () => {
@@ -28,8 +26,6 @@ export function Register() {
     },
     { scope: root },
   );
-
-  const slotsLeft = event.capacity - event.confirmed;
 
   return (
     <section
@@ -67,81 +63,56 @@ export function Register() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_420px] gap-6">
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="relative p-8 md:p-12 rounded-2xl border border-white/10 bg-navy-950/60 backdrop-blur-xl shadow-glow-cyan"
-          >
-            <div className="absolute top-6 left-6 corner-label">REGISTER.FORM</div>
-            <div className="absolute top-6 right-6 corner-label text-cyan-300">
-              ● READY
+        <div className="grid lg:grid-cols-[1fr_420px] gap-6 items-start">
+          {/* Luma registration widget */}
+          <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 bg-navy-950/60 backdrop-blur-xl shadow-glow-cyan">
+            <div className="flex items-center justify-between mb-5 px-1">
+              <div className="corner-label !static">REGISTER.FORM</div>
+              <div className="corner-label !static text-cyan-300">● POWERED BY LUMA</div>
             </div>
-
-            <div className="grid sm:grid-cols-2 gap-5 mt-8">
-              <Field label="Nombre" placeholder="Camila Vargas" />
-              <Field label="Email" type="email" placeholder="camila@upb.edu" />
-              <Field label="Universidad" placeholder="UPB Cochabamba" />
-              <Field label="Año / Carrera" placeholder="3er año · Sistemas" />
-            </div>
-
-            <div className="mt-8 space-y-3">
-              <div className="mono-label text-white/40">Track preferido</div>
-              <div className="flex flex-wrap gap-2">
-                {['cloud', 'devops', 'ai', 'security'].map((t) => (
-                  <label
-                    key={t}
-                    className="pill cursor-pointer hover:border-cyan-400/40 hover:text-white transition-colors"
-                  >
-                    <input type="checkbox" className="accent-cyan-400 mr-1.5" />
-                    /{t}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-10 flex items-center justify-between gap-4 flex-wrap">
-              <div className="flex items-center gap-3">
-                <Logo size={22} className="opacity-60" />
-                <p className="font-mono text-[11px] text-white/40 max-w-[36ch]">
-                  Recibirás tu wristband digital + acceso al Discord en 24h.
-                </p>
-              </div>
-              <button
-                ref={submitRef}
-                type="submit"
-                data-cursor="send"
-                className="btn-primary will-change-transform"
+            <iframe
+              src={event.lumaEmbedUrl}
+              title="Registro — AWS Student Community Day Bolivia 2026"
+              className="w-full rounded-xl border border-white/10 bg-white"
+              style={{ minHeight: 450 }}
+              height={450}
+              frameBorder={0}
+              allow="fullscreen; payment"
+              aria-label="Formulario de registro del evento en Luma"
+            />
+            <p className="mt-5 px-1 font-mono text-[11px] text-white/40">
+              ¿No carga el registro?{' '}
+              <a
+                href={event.lumaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 hover:underline"
               >
-                <span className="pointer-events-none inline-flex items-center gap-3">
-                  Register — Free
-                  <span aria-hidden>→</span>
-                </span>
-              </button>
-            </div>
-          </form>
+                Ábrelo en Luma →
+              </a>
+            </p>
+          </div>
 
           <aside className="space-y-4">
-            <Stat
-              label="Confirmed"
-              value={event.confirmed}
-              total={event.capacity}
-              accent="text-cyan-300"
-              barClass="bg-cyan-300"
-            />
-            <Stat
-              label="Slots left"
-              value={slotsLeft}
-              total={event.capacity}
-              accent="text-signal-live"
-              barClass="bg-signal-live"
-            />
-            <Stat
-              label="Waitlist"
-              value={event.waitlist}
-              total={100}
-              accent="text-amber-300"
-              barClass="bg-amber-300"
-            />
+            <InfoCard label="Cuándo">
+              <div className="font-display text-2xl text-white leading-tight">
+                {event.weekday} {event.dateDisplay}
+              </div>
+              <div className="font-mono text-[11px] text-white/40 mt-1">09:00 — 19:00</div>
+            </InfoCard>
+            <InfoCard label="Dónde">
+              <div className="font-display text-xl text-white leading-tight">{event.venue}</div>
+              <div className="font-mono text-[11px] text-white/40 mt-1">{event.address}</div>
+            </InfoCard>
+            <InfoCard label="Qué traer">
+              <ul className="space-y-1.5 mt-1">
+                {['Laptop cargada', 'ID universitaria', 'Curiosidad'].map((i) => (
+                  <li key={i} className="flex items-center gap-2 text-[14px] text-ink-200">
+                    <span className="text-cyan-300 font-mono">✓</span> {i}
+                  </li>
+                ))}
+              </ul>
+            </InfoCard>
             <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
               <div className="mono-label mb-3">Contact</div>
               <a
@@ -161,56 +132,11 @@ export function Register() {
   );
 }
 
-function Field({
-  label,
-  placeholder,
-  type = 'text',
-}: {
-  label: string;
-  placeholder: string;
-  type?: string;
-}) {
-  return (
-    <label className="block space-y-2">
-      <div className="mono-label text-white/50">{label}</div>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 font-sans text-[15px] focus:border-cyan-400/60 focus:bg-cyan-400/5 transition-colors outline-none"
-      />
-    </label>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  total,
-  accent,
-  barClass,
-}: {
-  label: string;
-  value: number;
-  total: number;
-  accent: string;
-  barClass: string;
-}) {
-  const pct = Math.min(100, Math.round((value / total) * 100));
+function InfoCard({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
-      <div className="flex items-end justify-between mb-3">
-        <div className="mono-label">{label}</div>
-        <div className={`font-display font-medium text-3xl tabular-nums ${accent}`}>
-          {value}
-          <span className="text-white/30 text-xl"> / {total}</span>
-        </div>
-      </div>
-      <div className="h-1 w-full rounded-full bg-white/5 overflow-hidden">
-        <div
-          className={`h-full ${barClass} transition-all duration-1000`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+      <div className="mono-label mb-3">{label}</div>
+      {children}
     </div>
   );
 }

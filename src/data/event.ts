@@ -17,6 +17,9 @@ export const event = {
   contactEmail: 'hi@scd-bolivia.dev',
   socialHandle: '@scdbolivia',
   address: 'UPB · Av. Capitán Víctor Ustariz',
+  // Luma registration. Public link for share/SEO; embed URL for the in-page widget.
+  lumaUrl: 'https://luma.com/r65j1ukn',
+  lumaEmbedUrl: 'https://luma.com/embed/event/evt-FbVkx9njqUDpSD2/simple',
 };
 
 export const navLinks = [
@@ -126,6 +129,7 @@ export const sponsorTiers = [
     tagline: 'Eres el evento',
     featured: true,
     accent: 'cyan',
+    price: 'USD 1000',
     benefits: [
       'Co-branding en el nombre y comunicados del evento',
       'Keynote slot — 45 min on stage (tema libre)',
@@ -145,6 +149,7 @@ export const sponsorTiers = [
     tagline: 'Máxima visibilidad',
     featured: false,
     accent: 'white',
+    price: 'USD 800',
     benefits: [
       'Logo destacado en web, stage y materiales impresos',
       'Lightning talk — 15 min on stage',
@@ -163,6 +168,7 @@ export const sponsorTiers = [
     tagline: 'Presencia activa',
     featured: false,
     accent: 'amber',
+    price: 'USD 500',
     benefits: [
       'Logo en website y materiales del evento',
       'Mesa en zona de networking',
@@ -180,15 +186,19 @@ export const sponsorTiers = [
     tagline: 'Apoya la comunidad',
     featured: false,
     accent: 'neutral',
+    price: 'USD 300',
     benefits: [
       'Logo en website del evento',
       'Mención en escenario principal',
-      'Techmixer — 2 invitaciones al networking VIP',
       'Mención en redes sociales',
       '2 pases de acceso completo',
     ],
   },
 ] as const;
+
+// Shown under the pricing grid on /sponsor-deck.
+export const sponsorPricingNote =
+  '¿Tu empresa maneja otro presupuesto? Nos adaptamos con aportes específicos — escríbenos y armamos un paquete a medida.';
 
 export const marqueeWords = [
   'BUILD · BREAK · DEPLOY',

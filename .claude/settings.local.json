@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(node -e \"const fs=require\\('fs'\\); const html=fs.readFileSync\\('dist/index.html','utf-8'\\); const start=html.indexOf\\('<div id=\\\\\"root\\\\\">'\\); const chunk=html.slice\\(start, start+500\\); console.log\\(chunk\\);\")",
+      "Bash(git grep *)",
+      "Bash(echo \"=== exit:$? ===\")",
+      "PowerShell(npm run *)"
     ]
   }
 }

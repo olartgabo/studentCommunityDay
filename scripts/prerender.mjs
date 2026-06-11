@@ -118,16 +118,44 @@ global.performance = global.window.performance;
 try {
   const entryPath = path.join(root, 'dist', 'server', 'entry-server.js');
   const { render } = await import(pathToFileURL(entryPath).href);
-  const appHtml = render();
 
   const indexPath = path.join(root, 'dist', 'index.html');
   const template = fs.readFileSync(indexPath, 'utf-8');
-  const output = template.replace(
-    '<div id="root"></div>',
-    `<div id="root">${appHtml}</div>`,
+
+  // ── Home page ──────────────────────────────────────────────────────────────
+  fs.writeFileSync(
+    indexPath,
+    template.replace('<div id="root"></div>', `<div id="root">${render('/')}</div>`),
   );
-  fs.writeFileSync(indexPath, output);
   console.log('  ✓ Prerendered dist/index.html — crawlers now see full static HTML');
+
+  // ── /sponsor-deck page ───────────────────────────────────────────────────────
+  const DECK_SEO = `<!-- seo:start -->
+    <title>Sponsor Deck — AWS Student Community Day Bolivia 2026</title>
+    <meta name="description" content="Patrocina el AWS Student Community Day Bolivia 2026. Pon tu marca frente a 500+ estudiantes de ingeniería y la próxima generación cloud. Paquetes, beneficios y precios de patrocinio." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://studentcommunity.day/sponsor-deck" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sponsor Deck — AWS Student Community Day Bolivia 2026" />
+    <meta property="og:description" content="Pon tu marca frente a 500+ estudiantes de ingeniería y la próxima generación cloud de Bolivia. Paquetes de patrocinio 2026." />
+    <meta property="og:url" content="https://studentcommunity.day/sponsor-deck" />
+    <meta property="og:site_name" content="Student Community Day Bolivia" />
+    <meta property="og:locale" content="es_BO" />
+    <meta property="og:image" content="https://studentcommunity.day/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sponsor Deck — AWS Student Community Day Bolivia 2026" />
+    <meta name="twitter:description" content="Pon tu marca frente a 500+ estudiantes de ingeniería y la próxima generación cloud de Bolivia." />
+    <meta name="twitter:image" content="https://studentcommunity.day/og-image.png" />
+    <!-- seo:end -->`;
+
+  const deckHtml = template
+    .replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, DECK_SEO)
+    .replace('<div id="root"></div>', `<div id="root">${render('/sponsor-deck')}</div>`);
+
+  const deckDir = path.join(root, 'dist', 'sponsor-deck');
+  fs.mkdirSync(deckDir, { recursive: true });
+  fs.writeFileSync(path.join(deckDir, 'index.html'), deckHtml);
+  console.log('  ✓ Prerendered dist/sponsor-deck/index.html');
 } catch (err) {
   console.warn('  ⚠ Prerender render step failed — noscript fallback remains active');
   console.warn('   ', err.message);
