@@ -171,7 +171,7 @@ export const sponsorTiers = [
     price: 'USD 500',
     benefits: [
       'Logo en website y materiales del evento',
-      'Mesa en zona de networking',
+      'Mesa en zona de networking yooo',
       'Material de marca en bolsas de regalo',
       'Techmixer — 3 invitaciones al networking VIP',
       'Publicación de vacantes en redes sociales',
